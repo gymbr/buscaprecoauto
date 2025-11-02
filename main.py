@@ -695,7 +695,8 @@ def realizar_comparacao_automatica():
     # Prioridade 2: Ordenação crescente pelo menor preço unitário.
     # Prioridade 3 (NOVO): Ordem alfabética pelo nome de exibição.
     
-    # *** CORREÇÃO DE INDENTAÇÃO: O código de ordenação deve estar no mesmo nível do 'with' ***
+    # Tolerância para evitar erros de ponto flutuante na comparação de igualdade/menor ou igual.
+    TOLERANCE = 0.001 
     
     def chave_ordenacao(item):
         shibata_val = item['shibata_preco_val']
@@ -706,9 +707,8 @@ def realizar_comparacao_automatica():
         melhor_preco_atual = min(shibata_val, nagumo_val)
         
         # 1. Indicador de "Preço Verde" (Prioridade 1: Igual ou menor que o preço de referência)
-        # Retorna 0 (primeiro) se o melhor preço atual for menor ou igual ao preço de referência (e disponível).
-        # Retorna 1 (depois) caso contrário.
-        is_green = 0 if preco_ref and melhor_preco_atual <= preco_ref and melhor_preco_atual != float('inf') else 1
+        # Usa TOLERANCE: melhor_preco_atual <= preco_ref + TOLERANCE
+        is_green = 0 if preco_ref and melhor_preco_atual <= preco_ref + TOLERANCE and melhor_preco_atual != float('inf') else 1
         
         # 2. Valor do Melhor Preço (Prioridade 2: Ordena crescentemente)
         # Se for float('inf'), será jogado para o final por este critério.
@@ -822,6 +822,9 @@ if resultados_comparacao:
     
     if not resultados_filtrados:
         st.info("Nenhum item encontrado com o filtro aplicado.")
+        
+    # Tolerância para evitar erros de ponto flutuante na comparação de igualdade/menor ou igual.
+    TOLERANCE = 0.001
 
     # Exibe os resultados na lista formatada
     for item in resultados_filtrados:
@@ -851,10 +854,10 @@ if resultados_comparacao:
         shibata_color = "red"
         nagumo_color = "red"
         
-        # Se o preço do mercado for menor ou igual ao preço de referência, usa verde
-        if preco_ref and shibata_disponivel and shibata_val <= preco_ref:
+        # Se o preço do mercado for menor ou igual ao preço de referência, usa verde (COM TOLERÂNCIA)
+        if preco_ref and shibata_disponivel and shibata_val <= preco_ref + TOLERANCE:
             shibata_color = "green"
-        if preco_ref and nagumo_disponivel and nagumo_val <= preco_ref:
+        if preco_ref and nagumo_disponivel and nagumo_val <= preco_ref + TOLERANCE:
             nagumo_color = "green"
             
         # 2. Negrito (Para o melhor preço entre os dois mercados)

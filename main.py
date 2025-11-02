@@ -475,11 +475,20 @@ def processar_item(item):
     # 1. Busca e Processamento Shibata (POR ID) - AJUSTADO PARA LIDAR COM LISTA
     # ----------------------------------------------------------------------
     produtos_shibata_processados = []
-    shibata_urls = item.get('shibata', []) # Pega o valor (string ou lista)
+    shibata_urls_full = item.get('shibata', []) # Pega o valor (string ou lista)
     
+    # Guarda o primeiro link para exibição
+    shibata_link_exibicao = "" 
+
     # *** NOVO: Trata se for string (legado) ou lista ***
-    if isinstance(shibata_urls, str):
-        shibata_urls = [shibata_urls] if shibata_urls else []
+    if isinstance(shibata_urls_full, str):
+        shibata_urls = [shibata_urls_full] if shibata_urls_full else []
+    else:
+        shibata_urls = shibata_urls_full[:] # Cria uma cópia da lista
+        
+    if shibata_urls:
+         # Pega a primeira URL para o link de exibição
+         shibata_link_exibicao = shibata_urls[0] 
     # ****************************************************
     
     shibata_imagem_url = None
@@ -571,11 +580,20 @@ def processar_item(item):
     # 2. Busca e Processamento Nagumo (POR SKU) - AJUSTADO PARA LIDAR COM LISTA
     # ----------------------------------------------------------------------
     produtos_nagumo_processados = []
-    nagumo_urls = item.get('nagumo', [])
+    nagumo_urls_full = item.get('nagumo', [])
+    
+    # Guarda o primeiro link para exibição
+    nagumo_link_exibicao = "" 
     
     # *** NOVO: Trata se for string (legado) ou lista ***
-    if isinstance(nagumo_urls, str):
-        nagumo_urls = [nagumo_urls] if nagumo_urls else []
+    if isinstance(nagumo_urls_full, str):
+        nagumo_urls = [nagumo_urls_full] if nagumo_urls_full else []
+    else:
+        nagumo_urls = nagumo_urls_full[:] # Cria uma cópia da lista
+        
+    if nagumo_urls:
+         # Pega a primeira URL para o link de exibição
+         nagumo_link_exibicao = nagumo_urls[0] 
     # ****************************************************
     
     nagumo_imagem_url = None
@@ -656,9 +674,9 @@ def processar_item(item):
         "nome_exibicao": nome_exibicao,
         "preco_principal_str": preco_principal_str,
         "imagem_principal": imagem_principal,
-        # Guarda as URLs como string para exibição/links
-        "nagumo": str(item.get('nagumo', '')), 
-        "shibata": str(item.get('shibata', '')), 
+        # Guarda a PRIMEIRA URL para exibição/links (CORREÇÃO AQUI)
+        "nagumo": nagumo_link_exibicao, 
+        "shibata": shibata_link_exibicao, 
         "shibata_preco_val": preco_shibata_val,
         "nagumo_preco_val": preco_nagumo_val,
         "shibata_preco_str": preco_shibata_str, 
@@ -924,6 +942,7 @@ if resultados_comparacao:
              img_src = DEFAULT_IMAGE_URL
 
         # Bloco HTML
+        # NOTA: item['shibata'] e item['nagumo'] AGORA contêm apenas a string da primeira URL, se houver.
         st.markdown(f"""
 <div class='comparison-item'>
     <img src="{img_src}" class='product-image' alt="{nome_original}" />

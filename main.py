@@ -471,9 +471,12 @@ def processar_item(item):
     # Extrai o preço de referência do nome do JSON
     preco_referencia_nome = extrair_preco_do_nome(nome_completo)
     
-    # Variáveis para guardar o link do produto com o melhor preço
+    # Variáveis para guardar o link e a imagem do produto com o melhor preço em cada mercado
     shibata_link_exibicao = ""
     nagumo_link_exibicao = ""
+    # Inicializa as variáveis de imagem com a imagem padrão
+    shibata_imagem_url = DEFAULT_IMAGE_URL 
+    nagumo_imagem_url = DEFAULT_IMAGE_URL 
     
     # ----------------------------------------------------------------------
     # 1. Busca e Processamento Shibata (POR ID) - AJUSTADO
@@ -487,7 +490,6 @@ def processar_item(item):
     else:
         shibata_urls = shibata_urls_full[:] # Cria uma cópia da lista
         
-    shibata_imagem_url = None
     
     for shibata_url in shibata_urls:
         if not shibata_url:
@@ -507,10 +509,12 @@ def processar_item(item):
                 # *** ADICIONA A URL ORIGINAL NO PRODUTO PARA SELEÇÃO POSTERIOR ***
                 p['original_url'] = shibata_url
                 
-                # LÓGICA DE IMAGEM SHIBATA
+                # LÓGICA DE IMAGEM SHIBATA (AGORA CORRETA: CADA PRODUTO TEM SUA PRÓPRIA IMAGEM)
                 imagem_nome = p.get('imagem')
-                if imagem_nome and not shibata_imagem_url: # Pega a primeira imagem válida
-                    shibata_imagem_url = f"{SHIBATA_IMAGE_BASE_URL}{imagem_nome}"
+                if imagem_nome: 
+                    p['imagem_url'] = f"{SHIBATA_IMAGE_BASE_URL}{imagem_nome}" 
+                else:
+                    p['imagem_url'] = DEFAULT_IMAGE_URL
                 
                 if not preco_oferta:
                     oferta_info = p.get('oferta') or {}
@@ -566,17 +570,20 @@ def processar_item(item):
                 
                 p['preco_unidade_val'] = preco_unidade_val
                 p['preco_unidade_str'] = preco_unidade_str 
-                p['imagem_url'] = shibata_imagem_url # Armazena a URL da imagem no produto
                 
                 # --- Fim da lógica de cálculo ---
                 
                 produtos_shibata_processados.append(p)
+                
     # Ordena todos os produtos encontrados para pegar o melhor preço
     produtos_shibata_ordenados = sorted(produtos_shibata_processados, key=lambda x: x['preco_unidade_val'])
     
-    # *** NOVO: ATRIBUI O LINK DO PRODUTO COM O MENOR PREÇO UNITÁRIO ***
-    if produtos_shibata_ordenados and produtos_shibata_ordenados[0].get('original_url'):
-        shibata_link_exibicao = produtos_shibata_ordenados[0]['original_url']
+    # *** EXTRAI O LINK E A IMAGEM DO PRODUTO COM O MENOR PREÇO UNITÁRIO DO SHIBATA ***
+    if produtos_shibata_ordenados:
+        melhor_shibata = produtos_shibata_ordenados[0]
+        shibata_link_exibicao = melhor_shibata.get('original_url', "")
+        shibata_imagem_url = melhor_shibata.get('imagem_url', DEFAULT_IMAGE_URL)
+
 
     # ----------------------------------------------------------------------
     # 2. Busca e Processamento Nagumo (POR SKU) - AJUSTADO
@@ -590,7 +597,6 @@ def processar_item(item):
     else:
         nagumo_urls = nagumo_urls_full[:] # Cria uma cópia da lista
         
-    nagumo_imagem_url = None
     
     for nagumo_url in nagumo_urls:
         if not nagumo_url:
@@ -614,10 +620,12 @@ def processar_item(item):
                 # *** ADICIONA A URL ORIGINAL NO PRODUTO PARA SELEÇÃO POSTERIOR ***
                 produto['original_url'] = nagumo_url
 
-                # LÓGICA DE IMAGEM NAGUMO
+                # LÓGICA DE IMAGEM NAGUMO (AGORA CORRETA: CADA PRODUTO TEM SUA PRÓPRIA IMAGEM)
                 photos = produto.get('photosUrl')
-                if photos and isinstance(photos, list) and len(photos) > 0 and not nagumo_imagem_url: # Pega a primeira imagem válida
-                    nagumo_imagem_url = photos[0]
+                if photos and isinstance(photos, list) and len(photos) > 0: 
+                    produto['imagem_url'] = photos[0]
+                else:
+                    produto['imagem_url'] = DEFAULT_IMAGE_URL
                 # ******************************
 
                 produto['preco_unitario_str'] = calcular_preco_unitario_nagumo(preco_exibir, produto.get('description', ''), produto['name'], produto.get("unit"))
@@ -627,9 +635,12 @@ def processar_item(item):
 
     produtos_nagumo_ordenados = sorted(produtos_nagumo_processados, key=lambda x: x['preco_unitario_valor'])
 
-    # *** NOVO: ATRIBUI O LINK DO PRODUTO COM O MENOR PREÇO UNITÁRIO ***
-    if produtos_nagumo_ordenados and produtos_nagumo_ordenados[0].get('original_url'):
-        nagumo_link_exibicao = produtos_nagumo_ordenados[0]['original_url']
+    # *** EXTRAI O LINK E A IMAGEM DO PRODUTO COM O MENOR PREÇO UNITÁRIO DO NAGUMO ***
+    if produtos_nagumo_ordenados:
+        melhor_nagumo = produtos_nagumo_ordenados[0]
+        nagumo_link_exibicao = melhor_nagumo.get('original_url', "")
+        nagumo_imagem_url = melhor_nagumo.get('imagem_url', DEFAULT_IMAGE_URL)
+
 
     # ----------------------------------------------------------------------
     # 3. Formata os Resultados Finais
@@ -645,12 +656,33 @@ def processar_item(item):
     is_shibata_melhor = preco_shibata_val <= preco_nagumo_val and preco_shibata_val != float('inf')
     is_nagumo_melhor = preco_nagumo_val < preco_shibata_val and preco_nagumo_val != float('inf')
     
-    # LÓGICA DE PRIORIDADE DE IMAGEM
-    if produtos_shibata_ordenados and produtos_shibata_ordenados[0].get('imagem_url'):
-        imagem_principal = produtos_shibata_ordenados[0]['imagem_url']
-    elif nagumo_imagem_url:
-        imagem_principal = nagumo_imagem_url
+    # *********************************************************************************
+    # LÓGICA DE PRIORIDADE DE IMAGEM CORRIGIDA E CONSOLIDADA: 
+    # Prioriza a imagem do produto que tem o melhor preço unitário geral.
+    # *********************************************************************************
     
+    # 1. Shibata é o melhor ou único disponível
+    if is_shibata_melhor:
+        if shibata_imagem_url and shibata_imagem_url != DEFAULT_IMAGE_URL:
+            imagem_principal = shibata_imagem_url
+        elif nagumo_imagem_url and nagumo_imagem_url != DEFAULT_IMAGE_URL:
+            imagem_principal = nagumo_imagem_url
+            
+    # 2. Nagumo é o melhor ou único disponível
+    elif is_nagumo_melhor:
+        if nagumo_imagem_url and nagumo_imagem_url != DEFAULT_IMAGE_URL:
+            imagem_principal = nagumo_imagem_url
+        elif shibata_imagem_url and shibata_imagem_url != DEFAULT_IMAGE_URL:
+            imagem_principal = shibata_imagem_url
+            
+    # 3. Ambos indisponíveis ou preços iguais, usa a primeira imagem disponível (Shibata > Nagumo)
+    else:
+        if shibata_imagem_url and shibata_imagem_url != DEFAULT_IMAGE_URL:
+             imagem_principal = shibata_imagem_url
+        elif nagumo_imagem_url and nagumo_imagem_url != DEFAULT_IMAGE_URL:
+            imagem_principal = nagumo_imagem_url
+            
+    # Fallback da string do preço principal (mantida)
     if is_shibata_melhor:
         preco_principal_str = preco_shibata_str
         

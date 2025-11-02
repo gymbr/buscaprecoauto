@@ -1,7 +1,10 @@
 [
   { "nome": "🥑 Abacate R$19,90", "nagumo": "", "shibata": "https://www.loja.shibata.com.br/produto/16570/abacate-1-unidade" },
-  { "nome": "🍍 Abacaxi R$7,99", "nagumo": "https://www.nagumo.com/p/5623", "shibata": "https://www.loja.shibata.com.br/produto/17797/abacaxi-perola-1-unidade" },
-  { "nome": "🧊 Açúcar", "nagumo": "", "shibata": "" },
+  { "nome": "🍍 Abacaxi R$7,99", "nagumo": "https://www.nagumo.com/p/5623", "shibata": [
+    "https://www.loja.shibata.com.br/produto/17797/abacaxi-perola-1-unidade",
+    "https://www.loja.shibata.com.br/produto/10124/nectar-nutri-1l-abacaxi"
+  ] },
+  { "nome": "🧊 Açúcar R$3,29", "nagumo": "https://www.nagumo.com/p/290418", "shibata": "https://www.loja.shibata.com.br/produto/11066/acucar-alto-alegre-refinado-pacote-1kg" },
   { "nome": "🥬 Alface", "nagumo": "", "shibata": "" },
   { "nome": "🧄 Alho kg R$16,90", "nagumo": "", "shibata": "" },
   { "nome": "🧼 Amaciante 1l R$17,27", "nagumo": "", "shibata": "" },

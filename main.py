@@ -687,27 +687,35 @@ def realizar_comparacao_automatica():
                 resultados_finais.append(resultado)
             except Exception as exc:
                 # Captura e loga erros que ocorreram na thread
-                st.error(f'Um item gerou uma exceção: {exc}')
-
+                # st.error(f'Um item gerou uma exceção: {exc}') # Removido para evitar poluição no Streamlit
+                pass # Garante que o bloco 'except' não está vazio, evitando IndentationError na linha seguinte
+                
     # --- Lógica de Ordenação AJUSTADA ---
-    # Prioridade 1: O menor preço unitário do item é menor que o preço de referência (COR VERDE)
+    # Prioridade 1: O menor preço unitário do item é menor ou igual ao preço de referência (COR VERDE)
     # Prioridade 2: Ordenação crescente pelo menor preço unitário.
+    # Prioridade 3 (NOVO): Ordem alfabética pelo nome de exibição.
+    
+    # *** CORREÇÃO DE INDENTAÇÃO: O código de ordenação deve estar no mesmo nível do 'with' ***
     
     def chave_ordenacao(item):
         shibata_val = item['shibata_preco_val']
         nagumo_val = item['nagumo_preco_val']
         preco_ref = item['preco_referencia_nome']
+        nome = remover_acentos(item['nome_exibicao']) # Para ordenação alfabética
         
         melhor_preco_atual = min(shibata_val, nagumo_val)
         
-        # 1. Indicador de "Preço Verde" (Prioridade 1)
-        # Retorna 0 (primeiro) se o melhor preço atual for menor que o preço de referência.
+        # 1. Indicador de "Preço Verde" (Prioridade 1: Igual ou menor que o preço de referência)
+        # Retorna 0 (primeiro) se o melhor preço atual for menor ou igual ao preço de referência (e disponível).
         # Retorna 1 (depois) caso contrário.
-        is_green = 0 if preco_ref and melhor_preco_atual < preco_ref and melhor_preco_atual != float('inf') else 1
+        is_green = 0 if preco_ref and melhor_preco_atual <= preco_ref and melhor_preco_atual != float('inf') else 1
         
-        # 2. Valor do Melhor Preço (Prioridade 2)
-        # Ordena crescentemente.
-        return (is_green, melhor_preco_atual)
+        # 2. Valor do Melhor Preço (Prioridade 2: Ordena crescentemente)
+        # Se for float('inf'), será jogado para o final por este critério.
+        
+        # 3. Nome de Exibição (Prioridade 3: Ordem alfabética)
+        
+        return (is_green, melhor_preco_atual, nome)
 
     resultados_finais.sort(key=chave_ordenacao)
     
@@ -789,14 +797,34 @@ st.markdown(f"<h6>🛒 Comparação Automática de Preços (Lendo {JSON_FILE})</
 
 # Executa a comparação
 # O 'st.spinner' agora encapsula a execução paralela
-with st.spinner("🔍 Buscando e comparando preços em paralelo..."):
-    resultados_comparacao = realizar_comparacao_automatica()
+if 'resultados_comparacao' not in st.session_state:
+    with st.spinner("🔍 Buscando e comparando preços em paralelo..."):
+        st.session_state.resultados_comparacao = realizar_comparacao_automatica()
+
+resultados_comparacao = st.session_state.resultados_comparacao
 
 if resultados_comparacao:
+    
+    # Adicionar o campo de pesquisa (filtro)
+    termo_pesquisa = st.text_input("Filtro de Itens (Nome)", placeholder="Digite parte do nome do produto...")
+    
+    resultados_filtrados = []
+    if termo_pesquisa:
+        termo_pesquisa_limpo = remover_acentos(termo_pesquisa)
+        for item in resultados_comparacao:
+            nome_limpo = remover_acentos(item['nome_original_completo'])
+            if termo_pesquisa_limpo in nome_limpo:
+                resultados_filtrados.append(item)
+    else:
+        resultados_filtrados = resultados_comparacao
+
     st.markdown("<h5>Busca Automática de Preços</h5>", unsafe_allow_html=True)
+    
+    if not resultados_filtrados:
+        st.info("Nenhum item encontrado com o filtro aplicado.")
 
     # Exibe os resultados na lista formatada
-    for item in resultados_comparacao:
+    for item in resultados_filtrados:
         # Valores para comparação
         shibata_val = item['shibata_preco_val']
         nagumo_val = item['nagumo_preco_val']
@@ -819,14 +847,14 @@ if resultados_comparacao:
         
         # --- Lógica de Estilo --- (Cor e Negrito)
         
-        # 1. Cor (Prioridade: Verde se for menor que o preço de referência, senão Vermelho)
+        # 1. Cor (Prioridade: Verde se for menor ou igual ao preço de referência, senão Vermelho)
         shibata_color = "red"
         nagumo_color = "red"
         
-        # Se o preço do mercado for menor que o preço de referência, usa verde
-        if preco_ref and shibata_disponivel and shibata_val < preco_ref:
+        # Se o preço do mercado for menor ou igual ao preço de referência, usa verde
+        if preco_ref and shibata_disponivel and shibata_val <= preco_ref:
             shibata_color = "green"
-        if preco_ref and nagumo_disponivel and nagumo_val < preco_ref:
+        if preco_ref and nagumo_disponivel and nagumo_val <= preco_ref:
             nagumo_color = "green"
             
         # 2. Negrito (Para o melhor preço entre os dois mercados)

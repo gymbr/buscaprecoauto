@@ -111,7 +111,7 @@ def calcular_preco_unidade(descricao, preco_total):
     match_ml = re.search(r'(\d+(?:[\.,]\d+)?)\s*(ml|mililitros?)', desc_minus)
     if match_ml:
         litros = float(match_ml.group(1).replace(',', '.')) / 1000
-        if litros > 0: return preco_total / litros, f"R$ {preco_total / litros:.2f}".replace('.', ',') + "/L"
+        if litros > 0: return preco_total / litros, f"R$ {preco_total / litros:.2f}/L"
     return None, None
 
 def calcular_preco_papel_toalha(descricao, preco_total):
@@ -690,10 +690,7 @@ def realizar_comparacao_automatica():
                 # st.error(f'Um item gerou uma exceção: {exc}') # Removido para evitar poluição no Streamlit
                 pass # Garante que o bloco 'except' não está vazio, evitando IndentationError na linha seguinte
                 
-    # --- Lógica de Ordenação AJUSTADA ---
-    # Prioridade 1: O menor preço unitário do item é menor ou igual ao preço de referência (COR VERDE)
-    # Prioridade 2: Ordenação crescente pelo menor preço unitário.
-    # Prioridade 3 (NOVO): Ordem alfabética pelo nome de exibição.
+    # --- Lógica de Ordenação AJUSTADA para priorizar Ordem Alfabética DENTRO de cada grupo ---
     
     # Tolerância para evitar erros de ponto flutuante na comparação de igualdade/menor ou igual.
     TOLERANCE = 0.001 
@@ -706,16 +703,27 @@ def realizar_comparacao_automatica():
         
         melhor_preco_atual = min(shibata_val, nagumo_val)
         
-        # 1. Indicador de "Preço Verde" (Prioridade 1: Igual ou menor que o preço de referência)
-        # Usa TOLERANCE: melhor_preco_atual <= preco_ref + TOLERANCE
-        is_green = 0 if preco_ref and melhor_preco_atual <= preco_ref + TOLERANCE and melhor_preco_atual != float('inf') else 1
+        # 1. Indicador de Grupo de Ordenação
+        # 0: Verde (Preço <= Referência e Disponível)
+        # 1: Vermelho (Preço > Referência e Disponível)
+        # 2: N/D (Indisponível)
         
-        # 2. Valor do Melhor Preço (Prioridade 2: Ordena crescentemente)
-        # Se for float('inf'), será jogado para o final por este critério.
+        is_available = melhor_preco_atual != float('inf')
         
-        # 3. Nome de Exibição (Prioridade 3: Ordem alfabética)
+        if is_available:
+            # Verifica se é "Verde" (Preço <= Referência)
+            if preco_ref and melhor_preco_atual <= preco_ref + TOLERANCE:
+                grupo = 0 # Grupo Verde
+            else:
+                grupo = 1 # Grupo Vermelho
+        else:
+            grupo = 2 # Grupo N/D (Indisponível)
         
-        return (is_green, melhor_preco_atual, nome)
+        # A chave de ordenação será (Grupo, Nome Alfabético, Preço)
+        # O preço é mantido como 3º critério apenas para manter a consistência, 
+        # mas a ordem dentro do grupo será definida pelo Nome.
+        
+        return (grupo, nome, melhor_preco_atual) # ORDEM DE CRITÉRIOS: (GRUPO, NOME, PREÇO)
 
     resultados_finais.sort(key=chave_ordenacao)
     

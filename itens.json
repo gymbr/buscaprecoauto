@@ -1,104 +1,551 @@
 [
-  { "nome": "🥑 Abacate R$19,90", "nagumo": "", "shibata": "https://www.loja.shibata.com.br/produto/16570/abacate-1-unidade" },
-  { "nome": "🍍 Abacaxi R$7,99", 
-             "nagumo":  [
-                      "https://www.nagumo.com/p/5623"], 
-             "shibata": [
-                     "https://www.loja.shibata.com.br/produto/17797/abacaxi-perola-1-unidade",
-                     "https://www.loja.shibata.com.br/produto/10124/nectar-nutri-1l-abacaxi"] },
-  { "nome": "🧊 Açúcar R$3,29", "nagumo": "https://www.nagumo.com/p/290418", "shibata": "https://www.loja.shibata.com.br/produto/11066/acucar-alto-alegre-refinado-pacote-1kg" },
-  { "nome": "🥬 Alface", "nagumo": "", "shibata": "" },
-  { "nome": "🧄 Alho kg R$16,90", "nagumo": "", "shibata": "" },
-  { "nome": "🧼 Amaciante 1l R$17,27", "nagumo": "", "shibata": "" },
-  { "nome": "🍚 Arroz Camil R$18,50", "nagumo": "", "shibata": "" },
-  { "nome": "🫒 Azeitona 150g R$6,90", "nagumo": "", "shibata": "" },
-  { "nome": "🍌 Banana R$4,00", "nagumo": "https://www.nagumo.com/p/banana-nanica-kg-2004", "shibata": "https://www.loja.shibata.com.br/produto/16286/banana-nanica-14kg-aprox-6-unidades" },
-  { "nome": "🥔 Batata R$2,99", "nagumo": "", "shibata": "" },
-  { "nome": "🍟 Batata frita Uni 1kg R$14,90", "nagumo": "", "shibata": "" },
-  { "nome": "🍟 Batata palha 200g R$9,90", "nagumo": "", "shibata": "" },
-  { "nome": "🥖 Bisnaguinha R$6,00", "nagumo": "", "shibata": "" },
-  { "nome": "🍪 Bolacha R$1,98", "nagumo": "", "shibata": "" },
-  { "nome": "🍰 Bolo Oetker formigueiro R$4,98", "nagumo": "", "shibata": "" },
-  { "nome": "🍰 Bolo Seven Boys R$7,49", "nagumo": "", "shibata": "" },
-  { "nome": "🍰 Bolo Sol limão R$4,49", "nagumo": "", "shibata": "" },
-  { "nome": "🍰 Bolo Sol chocolate R$", "nagumo": "", "shibata": "" },
-  { "nome": "🛒 Calabresa", "nagumo": "", "shibata": "" },
-  { "nome": "🧴 Cândida", "nagumo": "", "shibata": "" },
-  { "nome": "🍑 Caqui", "nagumo": "", "shibata": "" },
-  { "nome": "🥩 Carne Acém Picado R$32,90", "nagumo": "", "shibata": "" },
-  { "nome": "🥩 Carne Acém Moído R$32,90", "nagumo": "", "shibata": "" },
-  { "nome": "🥩 Carne Miolo de Acém Bife", "nagumo": "", "shibata": "" },
-  { "nome": "🥕 Cenoura R$2,99", "nagumo": "", "shibata": "" },
-  { "nome": "🧂 Chimichurri", "nagumo": "", "shibata": "" },
-  { "nome": "🍫 Chocolate", "nagumo": "", "shibata": "" },
-  { "nome": "🍫 Chocotone", "nagumo": "", "shibata": "" },
-  { "nome": "🧂 Colorífico 200g R$5,79", "nagumo": "", "shibata": "" },
-  { "nome": "🧹 Cotonete", "nagumo": "", "shibata": "" },
-  { "nome": "🥬 Couve", "nagumo": "", "shibata": "" },
-  { "nome": "🥛 Creme de Leite", "nagumo": "", "shibata": "" },
-  { "nome": "🌾 Cuscuz", "nagumo": "", "shibata": "" },
-  { "nome": "🥛 Danone kg R$5,99", "nagumo": "", "shibata": "" },
-  { "nome": "🧴 Desinfetante R$7,99", "nagumo": "", "shibata": "" },
-  { "nome": "🧴 Desinfetante Suprema 2l R$4,59", "nagumo": "", "shibata": "" },
-  { "nome": "🛒 Desodorante Herbíssimo", "nagumo": "", "shibata": "" },
-  { "nome": "🛒 Desodorante Nivea Men Original Protect", "nagumo": "", "shibata": "" },
-  { "nome": "🧴 Detergente", "nagumo": "", "shibata": "" },
-  { "nome": "🪥 Escova", "nagumo": "", "shibata": "" },
-  { "nome": "🧽 Esponja Louça R$6,19" , "nagumo": "", "shibata": "" },
-  { "nome": "🧽 Esponja Banho R$6,19", "nagumo": "", "shibata": "" },
-  { "nome": "🌾 Farinha de Trigo Renata R$4,75" , "nagumo": "", "shibata": "" },
-  { "nome": "🌾 Farofa Yoki R$4,95" , "nagumo": "", "shibata": "" },
-  { "nome": "🫘 Feijão Preto R$4,99" , "nagumo": "", "shibata": "" },
-  { "nome": "🫘 Feijão Shibata R$6,95" , "nagumo": "", "shibata": "" },
-  { "nome": "🍔 Hambúrguer R$14,90" , "nagumo": "", "shibata": "" },
-  { "nome": "🛒 Inseticida" , "nagumo": "", "shibata": "" },
-  { "nome": "🍊 Laranja Pêra 18un R$10" , "nagumo": "", "shibata": "" },
-  { "nome": "🥛 Leite R$3,98" , "nagumo": "", "shibata": "" },
-  { "nome": "🥛 Leite condensado R$5,29" , "nagumo": "", "shibata": "" },
-  { "nome": "🛒 Linguiça de frango" , "nagumo": "", "shibata": "" },
-  { "nome": "🍋 Limão" , "nagumo": "", "shibata": "" },
-  { "nome": "🍃 Louro" , "nagumo": "", "shibata": "" },
-  { "nome": "🧴 Lustra móveis" , "nagumo": "", "shibata": "" },
-  { "nome": "🍎 Maçã Red/Gala R$9,99" , "nagumo": "", "shibata": "" },
-  { "nome": "🍝 Macarrão R$2,98" , "nagumo": "", "shibata": "" },
-  { "nome": "🥭 Mamão", "nagumo": "", "shibata": "" },
-  { "nome": "🥔 Mandioca" , "nagumo": "", "shibata": "" },
-  { "nome": "🥭 Manga R$3,99" , "nagumo": "", "shibata": "" },
-  { "nome": "🧈 Margarina R$7,49" , "nagumo": "", "shibata": "" },
-  { "nome": "🍝 Massa Lasanha 500g R$6,89" , "nagumo": "", "shibata": "" },
-  { "nome": "🥐 Massa Pastel 1kg R$11,90" , "nagumo": "", "shibata": "" },
-  { "nome": "🌽 Milho Quero R$3,25" , "nagumo": "", "shibata": "" },
-  { "nome": "🍅 Molho de tomate R$1,59" , "nagumo": "", "shibata": "" },
-  { "nome": "🧀 Mussarela R$45" , "nagumo": "", "shibata": "" },
-  { "nome": "🛒 Óleo" , "nagumo": "", "shibata": "" },
-  { "nome": "🧂 Orégano" , "nagumo": "", "shibata": "" },
-  { "nome": "🥚 Ovo 20un R$10,98" , "nagumo": "", "shibata": "" },
-  { "nome": "🦷 Palito de Dente 200un R$2,98" , "nagumo": "", "shibata": "" },
-  { "nome": "🍞 Pão Francês R$0,50" , "nagumo": "", "shibata": "" },
-  { "nome": "🧻 Papel higiênico R$15,90" , "nagumo": "", "shibata": "" },
-  { "nome": "🧻 Papel toalha" , "nagumo": "", "shibata": "" },
-  { "nome": "🧂 Páprica defumada" , "nagumo": "", "shibata": "" },
-  { "nome": "🧴 Pasta de dente R$9,79" , "nagumo": "", "shibata": "" },
-  { "nome": "🍗 Peito de frango R$19,90" , "nagumo": "", "shibata": "" },
-  { "nome": "🍐 Pêra" , "nagumo": "", "shibata": "" },
-  { "nome": "🥓 Presunto R$25,90" , "nagumo": "", "shibata": "" },
-  { "nome": "🐶 Ração Bionatural kg R$20" , "nagumo": "", "shibata": "" },
-  { "nome": "🛒 Repolho" , "nagumo": "", "shibata": "" },
-  { "nome": "🧀 Requeijão" , "nagumo": "", "shibata": "" },
-  { "nome": "🚿 Resistência Chuveiro" , "nagumo": "", "shibata": "" },
-  { "nome": "🧼 Sabão em pó" , "nagumo": "", "shibata": "" },
-  { "nome": "🧼 Sabonete Davene R$3,79" , "nagumo": "", "shibata": "" },
-  { "nome": "🧴 Sabonete líquido 2l R$21,90" , "nagumo": "", "shibata": "" },
-  { "nome": "🧂 Sal" , "nagumo": "", "shibata": "" },
-  { "nome": "🌭 Salsicha Perdigão R$12,90" , "nagumo": "", "shibata": "" },
-  { "nome": "🛒 Sazón feijão" , "nagumo": "", "shibata": "" },
-  { "nome": "🛒 Sazón Massa" , "nagumo": "", "shibata": "" },
-  { "nome": "🧴 Shampoo Clear Men" , "nagumo": "", "shibata": "" },
-  { "nome": "🍨 Sorvete Bombom R$25,90" , "nagumo": "", "shibata": "" },
-  { "nome": "🥣 Sucrilhos" , "nagumo": "", "shibata": "" },
-  { "nome": "🧂 Tempero Baiano" , "nagumo": "", "shibata": "" },
-  { "nome": "☕ Toddy" , "nagumo": "", "shibata": "" },
-  { "nome": "🍅 Tomate R$6" , "nagumo": "", "shibata": "" },
-  { "nome": "🍇 Uva R$8,99" , "nagumo": "", "shibata": "" },
-  { "nome": "🍶 Vinagre R$1,99", "nagumo": "", "shibata": "" }
-  ]
+  {
+    "nome": "🥑 Abacate R$19,90",
+    "nagumo": [],
+    "shibata": [
+      "https://www.loja.shibata.com.br/produto/16570/abacate-1-unidade"
+    ]
+  },
+  {
+    "nome": "🍍 Abacaxi R$7,99",
+    "nagumo": [
+      "https://www.nagumo.com/p/5623"
+    ],
+    "shibata": [
+      "https://www.loja.shibata.com.br/produto/17797/abacaxi-perola-1-unidade"
+    ]
+  },
+  {
+    "nome": "🧊 Açúcar R$3,29",
+    "nagumo": [
+      "https://www.nagumo.com/p/290418",
+      "https://www.nagumo.com/p/100069",
+      "https://www.nagumo.com/p/124669"
+    ],
+    "shibata": [
+      "https://www.loja.shibata.com.br/produto/11066/acucar-alto-alegre-refinado-pacote-1kg",
+      "https://www.loja.shibata.com.br/produto/2966/acucar-refinado-caravelas-pacote-1kg",
+      "https://www.loja.shibata.com.br/produto/12901/acucar-refinado-uniao-pacote-1kg"
+    ]
+  },
+  {
+    "nome": "🥬 Alface R$2,79",
+    "nagumo": [],
+    "shibata": [
+      "https://www.loja.shibata.com.br/produto/23006/alface-crespa-1-unidade",
+      "https://www.loja.shibata.com.br/produto/21693/alface-crespa-hidroponica-yamakawa-1-unidade"
+    ]
+  },
+  {
+    "nome": "🧄 Alho kg R$15,49",
+    "nagumo": [
+      "https://www.nagumo.com/p/577052",
+      "https://www.nagumo.com/p/266005",
+      "https://www.nagumo.com/p/577069",
+      "https://www.nagumo.com/p/266006",
+      "https://www.nagumo.com/p/577076"
+    ],
+    "shibata": [
+      "https://www.loja.shibata.com.br/produto/24725/alho-triturado-uni-sabor-pote-1kg",
+      "https://www.loja.shibata.com.br/produto/24710/alho-triturado-uni-sabor-pote-200g",
+      "https://www.loja.shibata.com.br/produto/18810/alho-e-cebola-uni-sabor-pote-200g"
+    ]
+  },
+  {
+    "nome": "🧼 Amaciante 1l R$17,27",
+    "nagumo": [
+      "https://www.nagumo.com/p/263942",
+      "https://www.nagumo.com/p/819008",
+      "https://www.nagumo.com/p/262693",
+      "https://www.nagumo.com/p/510608"
+    ],
+    "shibata": [
+      "https://www.loja.shibata.com.br/produto/7355/amaciante-de-roupa-concentrado-brisa-de-verao-downy-frasco-500ml",
+      "https://www.loja.shibata.com.br/produto/46252/refil-de-amaciante-de-roupa-concentrado-brisa-de-verao-downy-sache-750ml",
+      "https://www.loja.shibata.com.br/produto/6238/amaciante-de-roupa-concentrado-lirios-do-campo-downy-frasco-15l",
+      "https://www.loja.shibata.com.br/produto/17960/amaciante-de-roupa-concentrado-brisa-de-verao-downy-frasco-500ml-gratis-50ml",
+      "https://www.loja.shibata.com.br/produto/10350/amaciante-de-roupa-concentrado-brisa-de-verao-downy-frasco-1l"
+    ]
+  },
+  {
+    "nome": "🍚 Arroz Camil R$3,30",
+    "nagumo": [
+      "https://www.nagumo.com/p/293303",
+      "https://www.nagumo.com/p/122238"
+    ],
+    "shibata": [
+      "https://www.loja.shibata.com.br/produto/12542/arroz-branco-camil-tipo-1-pacote-5kg",
+      "https://www.loja.shibata.com.br/produto/14786/arroz-agulhinha-tipo-1-camil-pacote-1kg",
+      "https://www.loja.shibata.com.br/produto/9269/arroz-agulhinha-camil-tipo-1-pacote-2kg"
+    ]
+  },
+  {
+    "nome": "🫒 Azeitona R$23",
+    "nagumo": [],
+    "shibata": [
+      "https://www.loja.shibata.com.br/produto/7977/azeitona-verde-em-conserva-fatiada-rivoli-sache-peso-liquido-300g-peso-drenado-150g",
+      "https://www.loja.shibata.com.br/produto/9001/azeitona-verde-em-conserva-fatiada-vale-fertil-sache-peso-liquido-230g-peso-drenado-120g",
+      "https://www.loja.shibata.com.br/produto/12948/azeitona-verde-em-conserva-fatiada-rivoli-vidro-peso-liquido-335g-peso-drenado-160g"
+    ]
+  },
+  {
+    "nome": "🍌 Banana R$4,00",
+    "nagumo": [
+      "https://www.nagumo.com/p/banana-nanica-kg-2004",
+      "https://www.nagumo.com/p/2011"
+    ],
+    "shibata": [
+      "https://www.loja.shibata.com.br/produto/16286/banana-nanica-14kg-aprox-6-unidades",
+      "https://www.loja.shibata.com.br/produto/16465/banana-prata-11kg-aprox-8-unidades"
+    ]
+  },
+  {
+    "nome": "🥔 Batata R$2",
+    "nagumo": [
+      "https://www.nagumo.com/p/7511"
+    ],
+    "shibata": [
+      "https://www.loja.shibata.com.br/produto/16469/batata-lavada-1-unidade"
+    ]
+  },
+  {
+    "nome": "🍟 Batata frita R$9,95",
+    "nagumo": [
+      "https://www.nagumo.com/p/518260"
+    ],
+    "shibata": [
+      "https://www.loja.shibata.com.br/produto/22663/batata-palito-tradicional-uni-sabor-pacote-2kg",
+      "https://www.loja.shibata.com.br/produto/38826/batata-palito-tradicional-congelada-uni-sabor-pacote-105kg"
+    ]
+  },
+  {
+    "nome": "🍟 Batata palha 200g R$9,90",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🥖 Bisnaguinha R$6,00",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🍪 Bolacha R$1,98",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🍰 Bolo Oetker formigueiro R$4,98",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🍰 Bolo Seven Boys R$7,49",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🍰 Bolo Sol limão R$4,49",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🍰 Bolo Sol chocolate R$",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🛒 Calabresa",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🧴 Cândida",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🍑 Caqui",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🥩 Carne Acém Picado R$32,90",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🥩 Carne Acém Moído R$32,90",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🥩 Carne Miolo de Acém Bife",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🥕 Cenoura R$2,99",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🧂 Chimichurri",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🍫 Chocolate",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🍫 Chocotone",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🧂 Colorífico 200g R$5,79",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🧹 Cotonete",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🥬 Couve",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🥛 Creme de Leite",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🌾 Cuscuz",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🥛 Danone kg R$5,99",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🧴 Desinfetante R$7,99",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🧴 Desinfetante Suprema 2l R$4,59",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🛒 Desodorante Herbíssimo",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🛒 Desodorante Nivea Men Original Protect",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🧴 Detergente",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🪥 Escova",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🧽 Esponja Louça R$6,19",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🧽 Esponja Banho R$6,19",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🌾 Farinha de Trigo Renata R$4,75",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🌾 Farofa Yoki R$4,95",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🫘 Feijão Preto R$4,99",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🫘 Feijão Shibata R$6,95",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🍔 Hambúrguer R$14,90",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🛒 Inseticida",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🍊 Laranja Pêra 18un R$10",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🥛 Leite R$3,98",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🥛 Leite condensado R$5,29",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🛒 Linguiça de frango",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🍋 Limão",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🍃 Louro",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🧴 Lustra móveis",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🍎 Maçã Red/Gala R$9,99",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🍝 Macarrão R$2,98",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🥭 Mamão",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🥔 Mandioca",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🥭 Manga R$3,99",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🧈 Margarina R$7,49",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🍝 Massa Lasanha 500g R$6,89",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🥐 Massa Pastel 1kg R$11,90",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🌽 Milho Quero R$3,25",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🍅 Molho de tomate R$1,59",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🧀 Mussarela R$45",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🛒 Óleo",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🧂 Orégano",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🥚 Ovo 20un R$10,98",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🦷 Palito de Dente 200un R$2,98",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🍞 Pão Francês R$0,50",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🧻 Papel higiênico R$15,90",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🧻 Papel toalha",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🧂 Páprica defumada",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🧴 Pasta de dente R$9,79",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🍗 Peito de frango R$19,90",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🍐 Pêra",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🥓 Presunto R$25,90",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🐶 Ração Bionatural kg R$20",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🛒 Repolho",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🧀 Requeijão",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🚿 Resistência Chuveiro",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🧼 Sabão em pó",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🧼 Sabonete Davene R$3,79",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🧴 Sabonete líquido 2l R$21,90",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🧂 Sal",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🌭 Salsicha Perdigão R$12,90",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🛒 Sazón feijão",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🛒 Sazón Massa",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🧴 Shampoo Clear Men",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🍨 Sorvete Bombom R$25,90",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🥣 Sucrilhos",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🧂 Tempero Baiano",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "☕ Toddy",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🍅 Tomate R$6",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🍇 Uva R$8,99",
+    "nagumo": [],
+    "shibata": []
+  },
+  {
+    "nome": "🍶 Vinagre R$1,99",
+    "nagumo": [],
+    "shibata": []
+  }
+]

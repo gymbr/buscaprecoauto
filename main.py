@@ -581,14 +581,11 @@ def realizar_comparacao_automatica():
         is_shibata_melhor = preco_shibata_val <= preco_nagumo_val and preco_shibata_val != float('inf')
         is_nagumo_melhor = preco_nagumo_val < preco_shibata_val and preco_nagumo_val != float('inf')
         
-        # *** LÓGICA DE PRIORIDADE DE IMAGEM (NOVA) ***
-        # 1. SEMPRE usa a imagem do Shibata se estiver disponível
+        # *** LÓGICA DE PRIORIDADE DE IMAGEM ***
         if produtos_shibata_ordenados and produtos_shibata_ordenados[0].get('imagem_url'):
             imagem_principal = produtos_shibata_ordenados[0]['imagem_url']
-        # 2. Senão, tenta a do Nagumo
         elif nagumo_imagem_url:
             imagem_principal = nagumo_imagem_url
-        # 3. Senão, usa a DEFAULT_IMAGE_URL (que já é o valor inicial)
         # **********************************************
 
         if is_shibata_melhor:
@@ -607,6 +604,7 @@ def realizar_comparacao_automatica():
         
         # Monta o objeto final
         resultados_finais.append({
+            "nome_original_completo": item['nome'], # <-- NOME COMPLETO DO JSON
             "nome_exibicao": nome_exibicao,
             "preco_principal_str": preco_principal_str,
             "imagem_principal": imagem_principal,
@@ -723,8 +721,8 @@ if resultados_comparacao:
         shibata_preco_str_final = item['shibata_preco_str'] if shibata_disponivel else "N/D"
         nagumo_preco_str_final = item['nagumo_preco_str'] if nagumo_disponivel else "N/D"
         
-        # O nome original completo (item['nome_exibicao'])
-        nome_original = item['nome_exibicao']
+        # *** NOVO: Combina o NOME ORIGINAL COMPLETO do JSON e o melhor preço
+        nome_original = item['nome_original_completo']
         preco_destaque = item['preco_principal_str']
         
         # URL da Imagem
@@ -732,15 +730,12 @@ if resultados_comparacao:
         if not img_src:
              img_src = DEFAULT_IMAGE_URL
 
-        # Bloco HTML CORRIGIDO: 
-        # 1. Removendo divs extras para corrigir o Grid (agora todas as áreas são filhos diretos de comparison-item)
-        # 2. Usando {nome_original} em destaque no price-badge
+        # Bloco HTML CORRIGIDO: Agora exibe a string combinada (nome original + preço)
         st.markdown(f"""
 <div class='comparison-item'>
     <img src="{img_src}" class='product-image' alt="{nome_original}" />
     <div class='price-badge'>
-    <span style="font-weight: bold; font-size: 1.05em; line-height: 1.2;">{nome_original}</span><br>
-    <span style="font-weight: bold; font-size: 1.15em; color: green; line-height: 1.2;">{preco_destaque}</span>
+    <span style="font-weight: bold; font-size: 1.15em; line-height: 1.2;">{nome_original}</span>
     </div>
     <a href="{item['shibata']}" target="_blank" class='market-link shibata-link' style="{shibata_link_style}">
         <img src="{LOGO_SHIBATA_URL}" class='logo-pequeno' alt="Logo Shibata"/> Shibata: {shibata_preco_str_final}

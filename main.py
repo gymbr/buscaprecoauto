@@ -77,6 +77,7 @@ def extrair_preco_do_nome(nome_completo):
 def remover_acentos(texto):
     if not texto:
         return ""
+    # Remove acentos (diacríticos)
     return ''.join(c for c in unicodedata.normalize('NFD', texto) if unicodedata.category(c) != 'Mn').lower()
 
 def calcular_precos_papel(descricao, preco_total):
@@ -107,7 +108,7 @@ def calcular_preco_unidade(descricao, preco_total):
     match_l = re.search(r'(\d+(?:[\.,]\d+)?)\s*(l|litros?)', desc_minus)
     if match_l:
         litros = float(match_l.group(1).replace(',', '.'))
-        if litros > 0: return preco_total / litros, f"R$ {preco_total / litros:.2f}".replace('.', ',') + "/L"
+        if litros > 0: return preco_total / litros, f"R$ {preco_total / litros:.2f}/L"
     match_ml = re.search(r'(\d+(?:[\.,]\d+)?)\s*(ml|mililitros?)', desc_minus)
     if match_ml:
         litros = float(match_ml.group(1).replace(',', '.')) / 1000
@@ -699,14 +700,20 @@ def realizar_comparacao_automatica():
         shibata_val = item['shibata_preco_val']
         nagumo_val = item['nagumo_preco_val']
         preco_ref = item['preco_referencia_nome']
-        nome = remover_acentos(item['nome_exibicao']) # Para ordenação alfabética
+        
+        # *** AJUSTE CRÍTICO: Limpeza de nome para ordenação alfabética (remove emojis/símbolos) ***
+        nome_para_ordenacao = remover_acentos(item['nome_exibicao'])
+        # Remove caracteres que não são alfanuméricos, espaços, hífens ou barras
+        # Isso garante que a ordenação seja estritamente alfabética, ignorando emojis.
+        nome = re.sub(r'[^\w\s\-\/]', '', nome_para_ordenacao).strip()
+        # ****************************************************************************************
         
         melhor_preco_atual = min(shibata_val, nagumo_val)
         
         # 1. Indicador de Grupo de Ordenação
         # 0: Verde (Preço <= Referência e Disponível)
         # 1: Vermelho (Preço > Referência e Disponível)
-        # 2: N/D (Indisponível)
+        # 2: N/D (Indisponível - float('inf'))
         
         is_available = melhor_preco_atual != float('inf')
         
@@ -720,9 +727,6 @@ def realizar_comparacao_automatica():
             grupo = 2 # Grupo N/D (Indisponível)
         
         # A chave de ordenação será (Grupo, Nome Alfabético, Preço)
-        # O preço é mantido como 3º critério apenas para manter a consistência, 
-        # mas a ordem dentro do grupo será definida pelo Nome.
-        
         return (grupo, nome, melhor_preco_atual) # ORDEM DE CRITÉRIOS: (GRUPO, NOME, PREÇO)
 
     resultados_finais.sort(key=chave_ordenacao)
@@ -820,6 +824,7 @@ if resultados_comparacao:
     if termo_pesquisa:
         termo_pesquisa_limpo = remover_acentos(termo_pesquisa)
         for item in resultados_comparacao:
+            # Usa o nome original, limpo de acentos, para a pesquisa
             nome_limpo = remover_acentos(item['nome_original_completo'])
             if termo_pesquisa_limpo in nome_limpo:
                 resultados_filtrados.append(item)

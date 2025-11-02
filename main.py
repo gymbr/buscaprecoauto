@@ -57,6 +57,19 @@ def extrair_termos_busca(nome_completo):
     
     return nome_busca, nome_sem_preco # nome_busca, nome_exibicao
 
+# *** NOVA FUNÇÃO: EXTRAI O VALOR DE PREÇO DO NOME DO ITEM NO JSON ***
+def extrair_preco_do_nome(nome_completo):
+    """Extrai o primeiro preço (R$X,XX ou R$X.XX) do nome completo e retorna como float."""
+    match = re.search(r'R\$(\s*\d+(?:[.,]\d+)?)', nome_completo, flags=re.IGNORECASE)
+    if match:
+        # Substitui a vírgula por ponto para conversão para float
+        preco_str = match.group(1).strip().replace(',', '.')
+        try:
+            return float(preco_str)
+        except ValueError:
+            return None
+    return None
+
 # Funções utilitárias (mantidas)
 def remover_acentos(texto):
     if not texto:
@@ -426,7 +439,7 @@ def obter_melhor_preco_nagumo(produtos_ordenados):
     return preco_exibir, f"R$ {preco_exibir:.2f}/un".replace('.', ',')
 
 # ----------------------------------------------------------------------
-# LÓGICA PRINCIPAL DE COMPARAÇÃO (AJUSTADA PARA IMAGENS)
+# LÓGICA PRINCIPAL DE COMPARAÇÃO (AJUSTADA PARA IMAGENS E PREÇO DE REFERÊNCIA)
 # ----------------------------------------------------------------------
 def realizar_comparacao_automatica():
     """Executa a busca para a lista de itens lida do JSON e retorna os resultados formatados."""
@@ -440,6 +453,9 @@ def realizar_comparacao_automatica():
         # Extrai o nome de exibição do JSON
         nome_completo = item['nome']
         _, nome_exibicao = extrair_termos_busca(nome_completo)
+        
+        # *** NOVO: Extrai o preço de referência do nome do JSON ***
+        preco_referencia_nome = extrair_preco_do_nome(nome_completo)
         
         # ----------------------------------------------------------------------
         # 1. Busca e Processamento Shibata (POR ID)
@@ -613,7 +629,9 @@ def realizar_comparacao_automatica():
             "shibata_preco_val": preco_shibata_val,
             "nagumo_preco_val": preco_nagumo_val,
             "shibata_preco_str": preco_shibata_str, 
-            "nagumo_preco_str": preco_nagumo_str
+            "nagumo_preco_str": preco_nagumo_str,
+            # *** NOVO: Adiciona a referência de preço do JSON
+            "preco_referencia_nome": preco_referencia_nome
         })
         
     resultados_finais.sort(key=lambda x: min(x['shibata_preco_val'], x['nagumo_preco_val']))
@@ -670,7 +688,11 @@ st.markdown("""
             white-space: nowrap; 
             overflow: hidden; 
             text-overflow: ellipsis; 
-            color: red; /* CORREÇÃO: Define a cor vermelha para todos os links, conforme solicitado */
+            color: red; /* Cor padrão (se não for o melhor preço/preço de referência) */
+        }
+        .market-link:visited {
+            /* Força a cor a se manter igual a 'market-link' ou a sobrescrita por inline style */
+            color: inherit; 
         }
         .shibata-link { 
             grid-area: shibata;
@@ -681,8 +703,8 @@ st.markdown("""
         .logo-pequeno {
             vertical-align: middle; 
             margin-right: 5px;
-            height: 60px; /* CORREÇÃO: Tamanho dos logos unificado */
-            width: 60px; /* CORREÇÃO: Tamanho dos logos unificado */
+            height: 60px; 
+            width: 60px; 
             object-fit: contain;
         }
     </style>
@@ -699,30 +721,51 @@ if resultados_comparacao:
 
     # Exibe os resultados na lista formatada
     for item in resultados_comparacao:
-        # Verifica se um dos preços é "inf" (indisponível) para a comparação
-        shibata_disponivel = item['shibata_preco_val'] != float('inf')
-        nagumo_disponivel = item['nagumo_preco_val'] != float('inf')
+        # Valores para comparação
+        shibata_val = item['shibata_preco_val']
+        nagumo_val = item['nagumo_preco_val']
+        preco_ref = item['preco_referencia_nome'] # Preço extraído do nome do JSON
         
+        # Disponibilidade
+        shibata_disponivel = shibata_val != float('inf')
+        nagumo_disponivel = nagumo_val != float('inf')
+        
+        # Determina o melhor preço do mercado
         if shibata_disponivel and nagumo_disponivel:
-            is_shibata_melhor = item['shibata_preco_val'] <= item['nagumo_preco_val']
+            is_shibata_melhor = shibata_val <= nagumo_val
         elif shibata_disponivel:
             is_shibata_melhor = True
         elif nagumo_disponivel:
             is_shibata_melhor = False
         else:
-            is_shibata_melhor = False # Ambos indisponíveis, não há melhor
+            is_shibata_melhor = False # Ambos indisponíveis
 
         
-        # CORREÇÃO: A cor vermelha agora é definida na classe CSS .market-link.
-        # Mantive a lógica de 'font-weight: bold' para destacar o melhor preço, mas usei o vermelho fixo.
-        shibata_link_style = "font-weight: bold;" if is_shibata_melhor and shibata_disponivel else ""
-        nagumo_link_style = "font-weight: bold;" if not is_shibata_melhor and nagumo_disponivel else ""
+        # --- Lógica de Estilo ---
+        
+        # 1. Cor (Prioridade: Verde > Vermelho)
+        shibata_color = "red"
+        nagumo_color = "red"
+        
+        # Se o preço do mercado for menor que o preço de referência, usa verde
+        if preco_ref and shibata_disponivel and shibata_val < preco_ref:
+            shibata_color = "green"
+        if preco_ref and nagumo_disponivel and nagumo_val < preco_ref:
+            nagumo_color = "green"
+            
+        # 2. Negrito (Para o melhor preço entre os dois mercados)
+        shibata_weight = "bold" if is_shibata_melhor and shibata_disponivel else "normal"
+        nagumo_weight = "bold" if not is_shibata_melhor and nagumo_disponivel else "normal"
+        
+        # Style Final (Combinando cor e peso da fonte)
+        shibata_link_style = f"font-weight: {shibata_weight}; color: {shibata_color};"
+        nagumo_link_style = f"font-weight: {nagumo_weight}; color: {nagumo_color};"
         
         # Strings de preço para os links
         shibata_preco_str_final = item['shibata_preco_str'] if shibata_disponivel else "N/D"
         nagumo_preco_str_final = item['nagumo_preco_str'] if nagumo_disponivel else "N/D"
         
-        # *** NOVO: Combina o NOME ORIGINAL COMPLETO do JSON e o melhor preço
+        # NOME ORIGINAL COMPLETO do JSON e o melhor preço
         nome_original = item['nome_original_completo']
         preco_destaque = item['preco_principal_str']
         
@@ -731,7 +774,7 @@ if resultados_comparacao:
         if not img_src:
              img_src = DEFAULT_IMAGE_URL
 
-        # Bloco HTML CORRIGIDO: Adicionei estilo inline para o fundo branco do Shibata e apliquei os estilos de link.
+        # Bloco HTML CORRIGIDO: Aplica os estilos dinâmicos (cor e negrito)
         st.markdown(f"""
 <div class='comparison-item'>
     <img src="{img_src}" class='product-image' alt="{nome_original}" />

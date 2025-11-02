@@ -23,6 +23,8 @@ HEADERS_SHIBATA = {
 LOGO_SHIBATA_URL = "https://rawcdn.githack.com/gymbr/precosmercados/main/logo-shibata.png"
 LOGO_NAGUMO_URL = "https://rawcdn.githack.com/gymbr/precosmercados/main/logo-nagumo2.png"
 DEFAULT_IMAGE_URL = "https://rawcdn.githack.com/gymbr/precosmercados/main/sem-imagem.png"
+# URL base para a imagem do Shibata
+SHIBATA_IMAGE_BASE_URL = "https://produto-assets-vipcommerce-com-br.br-se1.magaluobjects.com/250x250/"
 
 
 # ----------------------------------------------------------------------
@@ -199,7 +201,8 @@ def calcular_preco_unitario_nagumo(preco_valor, descricao, nome, unidade_api=Non
         rolos, folhas_por_rolo, total_folhas, texto_exibicao = extrair_info_papel_toalha(nome, descricao)
         if total_folhas and total_folhas > 0:
             preco_por_item = preco_valor / total_folhas
-            return f"R$ {preco_por_item:.3f}/folha"
+            # Formatação para folha (3 casas decimais)
+            return f"R$ {preco_por_item:.3f}/folha" 
         return "Preço por folha: n/d"
         
     if "papel higi" in texto_completo:
@@ -211,6 +214,7 @@ def calcular_preco_unitario_nagumo(preco_valor, descricao, nome, unidade_api=Non
                 metros = float(match_metros.group(1).replace(',', '.'))
                 if rolos > 0 and metros > 0:
                     preco_por_metro = preco_valor / rolos / metros
+                    # Formatação para metro (3 casas decimais)
                     return f"R$ {preco_por_metro:.3f}/m"
             except:
                 pass
@@ -256,9 +260,11 @@ def calcular_preco_unitario_nagumo(preco_valor, descricao, nome, unidade_api=Non
     return f"R$ {preco_valor:.2f}/un"
 
 def extrair_valor_unitario(preco_unitario):
-    match = re.search(r"R\$ (\d+[.,]?\d*)", preco_unitario)
+    # Ajustado para lidar com formatação de 3 casas decimais (papel higiênico/toalha)
+    match = re.search(r"R\$ (\d+[.,]?\d+)", preco_unitario) 
     if match:
-        return float(match.group(1).replace(',', '.'))
+        # Usa o grupo inteiro para manter a precisão
+        return float(match.group(1).replace(',', '.')) 
     return float('inf')
 
 
@@ -383,24 +389,27 @@ def obter_melhor_preco_shibata(produtos_ordenados):
         preco_unidade_val = melhor_produto['preco_unidade_val']
         
         # Usa a string de unidade que já calculamos
-        preco_unidade_str = melhor_produto.get('preco_unidade_str', '/un')
+        preco_unidade_str = melhor_produto.get('preco_unidade_str', 'R$ 0,00/un')
         
-        # Tenta extrair a unidade do 'preco_unidade_str'
+        # Tenta extrair a unidade e o formato da string
         match = re.search(r"/([a-zA-Z]+)", preco_unidade_str)
         unidade = match.group(1).lower() if match else "un"
         
-        # Formatação especial para kg e L
-        if unidade in ['kg', 'l']:
-            return preco_unidade_val, f"R$ {preco_unidade_val:.2f}/{unidade}"
-        # Formatação especial para metro (papel)
+        # Formatação especial para kg e L (2 casas)
+        if unidade in ['kg', 'l', 'un']:
+            return preco_unidade_val, f"R$ {preco_unidade_val:.2f}/{unidade}".replace('.', ',')
+        # Formatação especial para metro (papel) (3 casas)
         if unidade == 'm':
-            return preco_unidade_val, f"R$ {preco_unidade_val:.3f}/{unidade}"
+            return preco_unidade_val, f"R$ {preco_unidade_val:.3f}/{unidade}".replace('.', ',')
+        # Formatação para folha (3 casas)
+        if unidade == 'folha':
+            return preco_unidade_val, f"R$ {preco_unidade_val:.3f}/{unidade}".replace('.', ',')
         
-        return preco_unidade_val, f"R$ {preco_unidade_val:.2f}/{unidade}"
+        return preco_unidade_val, preco_unidade_str.replace('.', ',')
     
     # Fallback se o cálculo falhar
     unidade_sigla = melhor_produto.get('unidade_sigla') or 'un'
-    return preco_total, f"R$ {preco_total:.2f}/{unidade_sigla.lower()}"
+    return preco_total, f"R$ {preco_total:.2f}/{unidade_sigla.lower()}".replace('.', ',')
 
 def obter_melhor_preco_nagumo(produtos_ordenados):
     """Retorna o melhor preço unitário (valor e string formatada) do Nagumo."""
@@ -419,7 +428,7 @@ def obter_melhor_preco_nagumo(produtos_ordenados):
     if preco_exibir == 0:
          return float('inf'), "Preço indisponível"
          
-    return preco_exibir, f"R$ {preco_exibir:.2f}/un"
+    return preco_exibir, f"R$ {preco_exibir:.2f}/un".replace('.', ',')
 
 # ----------------------------------------------------------------------
 # LÓGICA PRINCIPAL DE COMPARAÇÃO (AJUSTADA PARA IMAGENS)
@@ -444,6 +453,8 @@ def realizar_comparacao_automatica():
         shibata_url = item['shibata']
         match_shibata_id = re.search(r'/produto/(\d+)', shibata_url)
         
+        shibata_imagem_url = None
+        
         if match_shibata_id:
             produto_id = match_shibata_id.group(1)
             p = buscar_detalhes_shibata(produto_id) # p = 'produto_detalhe'
@@ -452,6 +463,12 @@ def realizar_comparacao_automatica():
                 preco = float(p.get('preco') or 0)
                 em_oferta = p.get('em_oferta', False)
                 preco_oferta = p.get('preco_oferta')
+                
+                # *** NOVA LÓGICA DE IMAGEM SHIBATA ***
+                imagem_nome = p.get('imagem')
+                if imagem_nome:
+                    shibata_imagem_url = f"{SHIBATA_IMAGE_BASE_URL}{imagem_nome}"
+                # ***********************************
                 
                 if not preco_oferta:
                     oferta_info = p.get('oferta') or {}
@@ -489,15 +506,26 @@ def realizar_comparacao_automatica():
                             preco_unidade_val = preco_total / quantidade
                     except: pass
                 
-                if not preco_unidade_val or preco_unidade_val == float('inf'): preco_unidade_val = preco_total
+                # Cálculo de papel toalha/higiênico (para unidade de folha/metro)
+                if contem_papel_toalha(f"{p.get('nome', '')} {descricao}"):
+                    total_folhas, preco_por_folha = calcular_preco_papel_toalha(f"{p.get('nome', '')} {descricao}", preco_total)
+                    if preco_por_folha:
+                        preco_unidade_val = preco_por_folha
+                        preco_unidade_str = f"R$ {preco_por_folha:.3f}/folha"
+
+                preco_por_metro_val, preco_por_metro_str = calcular_precos_papel(descricao, preco_total)
+                if preco_por_metro_val:
+                     preco_unidade_val = preco_por_metro_val 
+                     preco_unidade_str = preco_por_metro_str
+                
+                # Se ainda for float('inf') ou None, usa o preço total como unitário (fallback)
+                if not preco_unidade_val or preco_unidade_val == float('inf') or preco_unidade_val == 0: 
+                     preco_unidade_val = preco_total
                 
                 p['preco_unidade_val'] = preco_unidade_val
                 p['preco_unidade_str'] = preco_unidade_str 
+                p['imagem_url'] = shibata_imagem_url # Armazena a URL da imagem no produto
                 
-                preco_por_metro_val, preco_por_metro_str = calcular_precos_papel(descricao, preco_total)
-                if preco_por_metro_val:
-                     p['preco_unidade_val'] = preco_por_metro_val 
-                     p['preco_unidade_str'] = preco_por_metro_str
                 # --- Fim da lógica de cálculo ---
                 
                 produtos_shibata_processados.append(p)
@@ -515,6 +543,8 @@ def realizar_comparacao_automatica():
         sku_match_list = re.findall(r'(\d+)', nagumo_url.split('?')[0])
         sku = sku_match_list[-1] if sku_match_list else None
         
+        nagumo_imagem_url = None
+        
         if sku and sku.isdigit():
             produto = buscar_detalhes_nagumo_por_sku(sku)
             
@@ -526,6 +556,12 @@ def realizar_comparacao_automatica():
                 if promocao.get("isActive") and isinstance(cond, list) and len(cond) > 0:
                     preco_desconto = cond[0].get("price")
                 preco_exibir = preco_desconto if preco_desconto else preco_normal
+                
+                # *** LÓGICA DE IMAGEM NAGUMO ***
+                photos = produto.get('photosUrl')
+                if photos and isinstance(photos, list) and len(photos) > 0:
+                    nagumo_imagem_url = photos[0]
+                # ******************************
 
                 produto['preco_unitario_str'] = calcular_preco_unitario_nagumo(preco_exibir, produto.get('description', ''), produto['name'], produto.get("unit"))
                 produto['preco_unitario_valor'] = extrair_valor_unitario(produto['preco_unitario_str'])
@@ -537,7 +573,7 @@ def realizar_comparacao_automatica():
         produtos_nagumo_ordenados = sorted(produtos_nagumo_processados, key=lambda x: x['preco_unitario_valor'])
 
         # ----------------------------------------------------------------------
-        # 3. Formata os Resultados Finais (COM LÓGICA DE IMAGEM)
+        # 3. Formata os Resultados Finais (COM LÓGICA DE IMAGEM AJUSTADA)
         # ----------------------------------------------------------------------
         preco_shibata_val, preco_shibata_str = obter_melhor_preco_shibata(produtos_shibata_ordenados)
         preco_nagumo_val, preco_nagumo_str = obter_melhor_preco_nagumo(produtos_nagumo_ordenados)
@@ -551,32 +587,31 @@ def realizar_comparacao_automatica():
 
         if is_shibata_melhor:
             preco_principal_str = preco_shibata_str
-            if produtos_shibata_ordenados:
-                imagens = produtos_shibata_ordenados[0].get('imagens')
-                if imagens and isinstance(imagens, list) and len(imagens) > 0:
-                    imagem_principal = imagens[0].get('url_imagem', DEFAULT_IMAGE_URL)
-        
+            # Pega a imagem do Shibata se ele for o melhor
+            if produtos_shibata_ordenados and produtos_shibata_ordenados[0].get('imagem_url'):
+                imagem_principal = produtos_shibata_ordenados[0]['imagem_url']
+            elif nagumo_imagem_url: # Se o Shibata for melhor mas não tiver imagem, tenta o Nagumo
+                imagem_principal = nagumo_imagem_url
+            
         elif is_nagumo_melhor:
             preco_principal_str = preco_nagumo_str
-            if produtos_nagumo_ordenados:
-                photos = produtos_nagumo_ordenados[0].get('photosUrl')
-                if photos and isinstance(photos, list) and len(photos) > 0:
-                    imagem_principal = photos[0]
+            # Pega a imagem do Nagumo se ele for o melhor
+            if nagumo_imagem_url:
+                imagem_principal = nagumo_imagem_url
+            elif produtos_shibata_ordenados and produtos_shibata_ordenados[0].get('imagem_url'): # Se o Nagumo for melhor mas não tiver imagem, tenta o Shibata
+                imagem_principal = produtos_shibata_ordenados[0]['imagem_url']
         else:
-            # Fallback se ambos forem ruins, pega a primeira imagem que tiver
+            # Fallback (Nenhum preço é válido ou estão empatados e indisponíveis)
+            # Pega a primeira imagem que encontrar e o primeiro preço disponível
+            if produtos_shibata_ordenados and produtos_shibata_ordenados[0].get('imagem_url'):
+                imagem_principal = produtos_shibata_ordenados[0]['imagem_url']
+            elif nagumo_imagem_url:
+                imagem_principal = nagumo_imagem_url
+                
             if preco_shibata_str != "Preço indisponível":
                 preco_principal_str = preco_shibata_str
             elif preco_nagumo_str != "Preço indisponível":
                 preco_principal_str = preco_nagumo_str
-
-            if produtos_shibata_ordenados:
-                imagens = produtos_shibata_ordenados[0].get('imagens')
-                if imagens and isinstance(imagens, list) and len(imagens) > 0:
-                    imagem_principal = imagens[0].get('url_imagem', DEFAULT_IMAGE_URL)
-            elif produtos_nagumo_ordenados:
-                photos = produtos_nagumo_ordenados[0].get('photosUrl')
-                if photos and isinstance(photos, list) and len(photos) > 0:
-                    imagem_principal = photos[0]
 
         
         # Monta o objeto final
@@ -621,6 +656,7 @@ st.markdown("""
                 "image nagumo";
             gap: 2px 10px; /* 2px gap linha, 10px gap coluna */
             min-height: 90px; 
+            overflow: hidden; /* Garante que o conteúdo não vaze */
         }
         .product-image {
             grid-area: image;
@@ -636,12 +672,17 @@ st.markdown("""
             font-size: 1.1em;
             align-self: end; /* Alinha o título na base da sua célula */
             padding-bottom: 2px;
+            line-height: 1.2; /* Ajusta a altura da linha */
         }
         .market-link {
             text-decoration: none;
             display: block;
             padding: 2px 0;
             align-self: start; /* Alinha os links no topo de suas células */
+            font-size: 0.9em; /* Ajuste para melhor visualização */
+            white-space: nowrap; /* Evita quebras de linha indesejadas */
+            overflow: hidden; /* Esconde o excesso se houver */
+            text-overflow: ellipsis; /* Adiciona "..." se o texto for cortado */
         }
         .shibata-link { 
             grid-area: shibata;
@@ -650,6 +691,12 @@ st.markdown("""
         .nagumo-link { 
             grid-area: nagumo;
             color: #004488; 
+        }
+        .logo-pequeno {
+            vertical-align: middle; 
+            margin-right: 5px;
+            height: 16px; /* Tamanho do logo ajustado */
+            width: auto;
         }
     </style>
 """, unsafe_allow_html=True)
@@ -666,14 +713,26 @@ if resultados_comparacao:
 
     # Exibe os resultados na lista formatada
     for item in resultados_comparacao:
-        is_shibata_melhor = item['shibata_preco_val'] <= item['nagumo_preco_val']
+        # Verifica se um dos preços é "inf" (indisponível) para a comparação
+        shibata_disponivel = item['shibata_preco_val'] != float('inf')
+        nagumo_disponivel = item['nagumo_preco_val'] != float('inf')
         
-        shibata_link_style = "color: red; font-weight: bold;" if is_shibata_melhor and item['shibata_preco_val'] != float('inf') else "color: #880000;"
-        nagumo_link_style = "color: red; font-weight: bold;" if not is_shibata_melhor and item['nagumo_preco_val'] != float('inf') else "color: #004488;"
+        if shibata_disponivel and nagumo_disponivel:
+            is_shibata_melhor = item['shibata_preco_val'] <= item['nagumo_preco_val']
+        elif shibata_disponivel:
+            is_shibata_melhor = True
+        elif nagumo_disponivel:
+            is_shibata_melhor = False
+        else:
+            is_shibata_melhor = False # Ambos indisponíveis, não há melhor
+
+        
+        shibata_link_style = "color: red; font-weight: bold;" if is_shibata_melhor and shibata_disponivel else "color: #880000;"
+        nagumo_link_style = "color: red; font-weight: bold;" if not is_shibata_melhor and nagumo_disponivel else "color: #004488;"
         
         # Strings de preço para os links
-        shibata_preco_str_final = item['shibata_preco_str'] if item['shibata_preco_val'] != float('inf') else "N/D"
-        nagumo_preco_str_final = item['nagumo_preco_str'] if item['nagumo_preco_val'] != float('inf') else "N/D"
+        shibata_preco_str_final = item['shibata_preco_str'] if shibata_disponivel else "N/D"
+        nagumo_preco_str_final = item['nagumo_preco_str'] if nagumo_disponivel else "N/D"
         
         # Título principal formatado
         titulo_principal = f"{item['nome_exibicao']} ({item['preco_principal_str']})"
@@ -683,6 +742,7 @@ if resultados_comparacao:
         if not img_src:
              img_src = DEFAULT_IMAGE_URL
 
+        # Bloco HTML corrigido (especialmente a altura do logo)
         st.markdown(f"""
             <div class='comparison-item'>
                 <img src="{img_src}" class='product-image' alt="{item['nome_exibicao']}" />
@@ -692,11 +752,11 @@ if resultados_comparacao:
                 </div>
                 
                 <a href="{item['shibata']}" target="_blank" class='market-link shibata-link' style="{shibata_link_style}">
-                    <img src="{LOGO_SHIBATA_URL}" width="20" style="vertical-align: middle; margin-right: 5px;"/> Shibata: {shibata_preco_str_final}
+                    <img src="{LOGO_SHIBATA_URL}" class='logo-pequeno' alt="Logo Shibata"/> Shibata: {shibata_preco_str_final}
                 </a>
                 
                 <a href="{item['nagumo']}" target="_blank" class='market-link nagumo-link' style="{nagumo_link_style}">
-                    <img src="{LOGO_NAGUMO_URL}" width="20" style="vertical-align: middle; margin-right: 5px;"/> Nagumo: {nagumo_preco_str_final}
+                    <img src="{LOGO_NAGUMO_URL}" class='logo-pequeno' alt="Logo Nagumo"/> Nagumo: {nagumo_preco_str_final}
                 </a>
             </div>
         """, unsafe_allow_html=True)

@@ -252,7 +252,8 @@ def calcular_preco_unitario_nagumo(preco_valor, descricao, nome, unidade_api=Non
         elif unidade_api == 'un':
             return f"R$ {preco_valor:.2f}/un"
             
-    return preco_unitario
+    # Fallback se nenhuma unidade for encontrada
+    return f"R$ {preco_valor:.2f}/un"
 
 def extrair_valor_unitario(preco_unitario):
     match = re.search(r"R\$ (\d+[.,]?\d*)", preco_unitario)
@@ -288,7 +289,7 @@ def buscar_detalhes_shibata(produto_id):
 def buscar_detalhes_nagumo_por_sku(sku):
     """
     Busca os detalhes de um produto específico no Nagumo pelo SKU.
-    Utiliza a mesma query 'SearchProducts', mas filtra pelo SKU.
+    (CORRIGIDO) Utiliza a 'SearchProducts' buscando o SKU como termo de busca.
     """
     url = "https://nextgentheadless.instaleap.io/api/v3"
     headers = {
@@ -307,9 +308,9 @@ def buscar_detalhes_nagumo_por_sku(sku):
                 "storeReference": "22",
                 "currentPage": 1,
                 "minScore": 1,
-                "pageSize": 1, # Queremos apenas 1 resultado
-                "search": [], # NENHUM termo de busca
-                "filters": {"sku": [sku]}, # FILTRA pelo SKU
+                "pageSize": 5, # Busca 5 por segurança
+                "search": [{"query": sku}], # *** CORREÇÃO: Busca o SKU como termo
+                "filters": {}, # *** CORREÇÃO: Remove o filtro que não funcionava
                 "googleAnalyticsSessionId": ""
             }
         },
@@ -341,11 +342,20 @@ def buscar_detalhes_nagumo_por_sku(sku):
         response = requests.post(url, headers=headers, json=payload, timeout=10)
         data = response.json()
         produtos = data.get("data", {}).get("searchProducts", {}).get("products", [])
-        if produtos:
-            return produtos[0] # Retorna o primeiro produto encontrado
-        else:
-            st.warning(f"Nagumo API (SKU) não encontrou o item: {sku}")
+        
+        if not produtos:
+            st.warning(f"Nagumo API (SKU search) não encontrou o item: {sku}")
             return None
+
+        # *** CORREÇÃO: Itera nos resultados para achar o SKU exato
+        for produto in produtos:
+            if produto.get('sku') == sku:
+                return produto # Retorna o produto exato
+        
+        # Se saiu do loop, não encontrou o SKU exato
+        st.warning(f"Nagumo API (SKU search) encontrou {len(produtos)} itens para '{sku}', mas NENHUM correspondeu ao SKU exato.")
+        return None
+
     except requests.exceptions.RequestException as e:
         st.error(f"Erro de conexão ao buscar detalhes do Nagumo (SKU: {sku}): {e}")
         return None
@@ -364,6 +374,9 @@ def obter_melhor_preco_shibata(produtos_ordenados):
 
     melhor_produto = produtos_ordenados[0]
     preco_total = float(melhor_produto.get('preco_oferta') or melhor_produto.get('preco') or 0)
+    
+    if preco_total == 0:
+        return float('inf'), "Preço indisponível"
     
     # Prioriza o preco_unidade_val calculado por nós
     if 'preco_unidade_val' in melhor_produto and melhor_produto['preco_unidade_val'] != float('inf') and melhor_produto['preco_unidade_val'] > 0:
@@ -401,7 +414,11 @@ def obter_melhor_preco_nagumo(produtos_ordenados):
     if preco_unitario_valor != float('inf') and preco_unitario_valor > 0:
         return preco_unitario_valor, preco_unitario_str.replace('.', ',')
         
+    # Fallback
     preco_exibir = (melhor_produto.get("promotion") or {}).get("conditions", [{}])[0].get("price") or melhor_produto.get("price", 0)
+    if preco_exibir == 0:
+         return float('inf'), "Preço indisponível"
+         
     return preco_exibir, f"R$ {preco_exibir:.2f}/un"
 
 # ----------------------------------------------------------------------
@@ -539,6 +556,9 @@ def realizar_comparacao_automatica():
         else:
             # Fallback se ambos forem inf ou indisponíveis
             preco_principal_str = preco_shibata_str if preco_shibata_str != "Preço indisponível" else preco_nagumo_str
+            if preco_principal_str == "Preço indisponível":
+                preco_principal_str = "N/D"
+
 
         
         # Monta o objeto final

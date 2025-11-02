@@ -902,8 +902,6 @@ if resultados_comparacao:
     else:
         resultados_filtrados = resultados_comparacao
 
-    st.markdown("<h5>Busca Automática de Preços</h5>", unsafe_allow_html=True)
-    
     if not resultados_filtrados:
         st.info("Nenhum item encontrado com o filtro aplicado.")
         

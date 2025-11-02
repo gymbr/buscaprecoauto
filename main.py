@@ -647,7 +647,7 @@ st.markdown("""
                 "image nagumo";
             gap: 2px 10px; /* 2px gap linha, 10px gap coluna */
             min-height: 90px; 
-            overflow: hidden; /* Garante que o conteúdo não vaze */
+            overflow: hidden; 
         }
         .product-image {
             grid-area: image;
@@ -655,25 +655,23 @@ st.markdown("""
             height: 80px;
             object-fit: contain;
             border-radius: 4px;
-            align-self: center; /* Centraliza a imagem verticalmente */
+            align-self: center; 
         }
         .price-badge {
             grid-area: title;
-            font-weight: bold;
-            font-size: 1.1em;
-            align-self: end; /* Alinha o título na base da sua célula */
+            align-self: end; 
             padding-bottom: 2px;
-            line-height: 1.2; /* Ajusta a altura da linha */
+            line-height: 1.2; 
         }
         .market-link {
             text-decoration: none;
             display: block;
             padding: 2px 0;
-            align-self: start; /* Alinha os links no topo de suas células */
-            font-size: 0.9em; /* Ajuste para melhor visualização */
-            white-space: nowrap; /* Evita quebras de linha indesejadas */
-            overflow: hidden; /* Esconde o excesso se houver */
-            text-overflow: ellipsis; /* Adiciona "..." se o texto for cortado */
+            align-self: start; 
+            font-size: 0.9em; 
+            white-space: nowrap; 
+            overflow: hidden; 
+            text-overflow: ellipsis; 
         }
         .shibata-link { 
             grid-area: shibata;
@@ -686,7 +684,7 @@ st.markdown("""
         .logo-pequeno {
             vertical-align: middle; 
             margin-right: 5px;
-            height: 16px; /* Tamanho do logo ajustado */
+            height: 16px; 
             width: auto;
         }
     </style>
@@ -725,27 +723,28 @@ if resultados_comparacao:
         shibata_preco_str_final = item['shibata_preco_str'] if shibata_disponivel else "N/D"
         nagumo_preco_str_final = item['nagumo_preco_str'] if nagumo_disponivel else "N/D"
         
-        # Título principal formatado
-        titulo_principal = f"{item['nome_exibicao']} ({item['preco_principal_str']})"
+        # O nome original completo (item['nome_exibicao'])
+        nome_original = item['nome_exibicao']
+        preco_destaque = item['preco_principal_str']
         
         # URL da Imagem
         img_src = item.get('imagem_principal', DEFAULT_IMAGE_URL)
         if not img_src:
              img_src = DEFAULT_IMAGE_URL
 
-        # Bloco HTML corrigido (sem indentação após a primeira aspas)
+        # Bloco HTML CORRIGIDO: 
+        # 1. Removendo divs extras para corrigir o Grid (agora todas as áreas são filhos diretos de comparison-item)
+        # 2. Usando {nome_original} em destaque no price-badge
         st.markdown(f"""
 <div class='comparison-item'>
-    <img src="{img_src}" class='product-image' alt="{item['nome_exibicao']}" />
-    
+    <img src="{img_src}" class='product-image' alt="{nome_original}" />
     <div class='price-badge'>
-        {titulo_principal}
+    <span style="font-weight: bold; font-size: 1.05em; line-height: 1.2;">{nome_original}</span><br>
+    <span style="font-weight: bold; font-size: 1.15em; color: green; line-height: 1.2;">{preco_destaque}</span>
     </div>
-    
     <a href="{item['shibata']}" target="_blank" class='market-link shibata-link' style="{shibata_link_style}">
         <img src="{LOGO_SHIBATA_URL}" class='logo-pequeno' alt="Logo Shibata"/> Shibata: {shibata_preco_str_final}
     </a>
-    
     <a href="{item['nagumo']}" target="_blank" class='market-link nagumo-link' style="{nagumo_link_style}">
         <img src="{LOGO_NAGUMO_URL}" class='logo-pequeno' alt="Logo Nagumo"/> Nagumo: {nagumo_preco_str_final}
     </a>

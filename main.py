@@ -805,7 +805,8 @@ st.markdown("""
     <style>
         .block-container { padding-top: 0rem; }
         footer {visibility: hidden;}
-        #MainMenu {visibility: hidden;}
+        #MainMenu {visibility: hidden;} /* Oculta o menu de 3 pontos */
+        header {visibility: hidden;}    /* Oculta o cabeçalho principal (Deploy, Github, Editar) */
         
         /* *** AJUSTE PRINCIPAL AQUI: Borda apenas na parte inferior *** */
         .comparison-item {
@@ -876,7 +877,7 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-st.markdown(f"<h6>🛒 Comparação Automática de Preços (Lendo {JSON_FILE})</h6>", unsafe_allow_html=True)
+st.markdown(f"<h6>🛒 Busca Preço Automático</h6>", unsafe_allow_html=True)
 
 # Executa a comparação
 # O 'st.spinner' agora encapsula a execução paralela
@@ -889,7 +890,7 @@ resultados_comparacao = st.session_state.resultados_comparacao
 if resultados_comparacao:
     
     # Adicionar o campo de pesquisa (filtro)
-    termo_pesquisa = st.text_input("Filtro de Itens (Nome)", placeholder="Digite parte do nome do produto...")
+    termo_pesquisa = st.text_input("🔎 Digite o nome do produto:", placeholder="Digite parte do nome do produto...")
     
     resultados_filtrados = []
     if termo_pesquisa:

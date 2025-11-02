@@ -472,129 +472,143 @@ def processar_item(item):
     preco_referencia_nome = extrair_preco_do_nome(nome_completo)
     
     # ----------------------------------------------------------------------
-    # 1. Busca e Processamento Shibata (POR ID)
+    # 1. Busca e Processamento Shibata (POR ID) - AJUSTADO PARA LIDAR COM LISTA
     # ----------------------------------------------------------------------
     produtos_shibata_processados = []
-    shibata_url = item['shibata']
-    match_shibata_id = re.search(r'/produto/(\d+)', shibata_url)
+    shibata_urls = item.get('shibata', []) # Pega o valor (string ou lista)
+    
+    # *** NOVO: Trata se for string (legado) ou lista ***
+    if isinstance(shibata_urls, str):
+        shibata_urls = [shibata_urls] if shibata_urls else []
+    # ****************************************************
     
     shibata_imagem_url = None
     
-    if match_shibata_id:
-        produto_id = match_shibata_id.group(1)
-        p = buscar_detalhes_shibata(produto_id) # p = 'produto_detalhe'
+    for shibata_url in shibata_urls:
+        if not shibata_url:
+            continue
+            
+        match_shibata_id = re.search(r'/produto/(\d+)', shibata_url)
         
-        if p and p.get("disponivel", True):
-            preco = float(p.get('preco') or 0)
-            em_oferta = p.get('em_oferta', False)
-            preco_oferta = p.get('preco_oferta')
+        if match_shibata_id:
+            produto_id = match_shibata_id.group(1)
+            p = buscar_detalhes_shibata(produto_id) # p = 'produto_detalhe'
             
-            # *** NOVA LÓGICA DE IMAGEM SHIBATA ***
-            # O campo correto é 'imagem'
-            imagem_nome = p.get('imagem')
-            if imagem_nome:
-                shibata_imagem_url = f"{SHIBATA_IMAGE_BASE_URL}{imagem_nome}"
-            # ***********************************
-            
-            if not preco_oferta:
-                oferta_info = p.get('oferta') or {}
-                preco_oferta = oferta_info.get('preco_oferta')
+            if p and p.get("disponivel", True):
+                preco = float(p.get('preco') or 0)
+                em_oferta = p.get('em_oferta', False)
+                preco_oferta = p.get('preco_oferta')
                 
-            preco_total = float(preco_oferta) if em_oferta and preco_oferta else preco
-            
-            descricao = p.get('descricao', '')
-            quantidade_dif = p.get('quantidade_unidade_diferente')
-            unidade_sigla = p.get('unidade_sigla')
-            if unidade_sigla and unidade_sigla.lower() == "grande": unidade_sigla = None
-            
-            preco_unidade_str = formatar_preco_unidade_personalizado(preco_total, quantidade_dif, unidade_sigla)
-            
-            # --- Lógica de cálculo de preço unitário ---
-            descricao_limpa = descricao.lower().replace('grande', '').strip()
-            
-            preco_unidade_val, preco_un_str_papel = calcular_precos_papel(descricao, preco_total)
-            if preco_un_str_papel:
-                 preco_unidade_str = preco_un_str_papel
-            
-            if not preco_unidade_val:
-                preco_unidade_val, preco_un_str_generico = calcular_preco_unidade(descricao_limpa, preco_total)
-                if preco_un_str_generico:
-                    preco_unidade_str = preco_un_str_generico
+                # *** NOVA LÓGICA DE IMAGEM SHIBATA ***
+                imagem_nome = p.get('imagem')
+                if imagem_nome and not shibata_imagem_url: # Pega a primeira imagem válida
+                    shibata_imagem_url = f"{SHIBATA_IMAGE_BASE_URL}{imagem_nome}"
+                # ***********************************
+                
+                if not preco_oferta:
+                    oferta_info = p.get('oferta') or {}
+                    preco_oferta = oferta_info.get('preco_oferta')
+                    
+                preco_total = float(preco_oferta) if em_oferta and preco_oferta else preco
+                
+                descricao = p.get('descricao', '')
+                quantidade_dif = p.get('quantidade_unidade_diferente')
+                unidade_sigla = p.get('unidade_sigla')
+                if unidade_sigla and unidade_sigla.lower() == "grande": unidade_sigla = None
+                
+                preco_unidade_str = formatar_preco_unidade_personalizado(preco_total, quantidade_dif, unidade_sigla)
+                
+                # --- Lógica de cálculo de preço unitário (mantida) ---
+                descricao_limpa = descricao.lower().replace('grande', '').strip()
+                
+                preco_unidade_val, preco_un_str_papel = calcular_precos_papel(descricao, preco_total)
+                if preco_un_str_papel:
+                     preco_unidade_str = preco_un_str_papel
+                
+                if not preco_unidade_val:
+                    preco_unidade_val, preco_un_str_generico = calcular_preco_unidade(descricao_limpa, preco_total)
+                    if preco_un_str_generico:
+                        preco_unidade_str = preco_un_str_generico
 
-            match = re.search(r"/\s*([\d.,]+)\s*(kg|g|l|ml)", str(preco_unidade_str).lower())
-            if match:
-                try:
-                    quantidade = float(match.group(1).replace(",", "."))
-                    unidade = match.group(2).lower()
-                    if unidade == "g": quantidade /= 1000
-                    elif unidade == "ml": quantidade /= 1000
-                    if quantidade > 0:
-                        preco_unidade_val = preco_total / quantidade
-                except: pass
-            
-            # Cálculo de papel toalha/higiênico (para unidade de folha/metro)
-            if contem_papel_toalha(f"{p.get('nome', '')} {descricao}"):
-                total_folhas, preco_por_folha = calcular_preco_papel_toalha(f"{p.get('nome', '')} {descricao}", preco_total)
-                if preco_por_folha:
-                    preco_unidade_val = preco_por_folha
-                    preco_unidade_str = f"R$ {preco_por_folha:.3f}/folha".replace('.', ',')
+                match = re.search(r"/\s*([\d.,]+)\s*(kg|g|l|ml)", str(preco_unidade_str).lower())
+                if match:
+                    try:
+                        quantidade = float(match.group(1).replace(",", "."))
+                        unidade = match.group(2).lower()
+                        if unidade == "g": quantidade /= 1000
+                        elif unidade == "ml": quantidade /= 1000
+                        if quantidade > 0:
+                            preco_unidade_val = preco_total / quantidade
+                    except: pass
+                
+                # Cálculo de papel toalha/higiênico (para unidade de folha/metro)
+                if contem_papel_toalha(f"{p.get('nome', '')} {descricao}"):
+                    total_folhas, preco_por_folha = calcular_preco_papel_toalha(f"{p.get('nome', '')} {descricao}", preco_total)
+                    if preco_por_folha:
+                        preco_unidade_val = preco_por_folha
+                        preco_unidade_str = f"R$ {preco_por_folha:.3f}/folha".replace('.', ',')
 
-            preco_por_metro_val, preco_por_metro_str = calcular_precos_papel(descricao, preco_total)
-            if preco_por_metro_val:
-                 preco_unidade_val = preco_por_metro_val 
-                 preco_unidade_str = preco_por_metro_str.replace('.', ',')
-            
-            # Se ainda for float('inf') ou None, usa o preço total como unitário (fallback)
-            if not preco_unidade_val or preco_unidade_val == float('inf') or preco_unidade_val == 0: 
-                 preco_unidade_val = preco_total
-            
-            p['preco_unidade_val'] = preco_unidade_val
-            p['preco_unidade_str'] = preco_unidade_str 
-            p['imagem_url'] = shibata_imagem_url # Armazena a URL da imagem no produto
-            
-            # --- Fim da lógica de cálculo ---
-            
-            produtos_shibata_processados.append(p)
-    # else: # Removido para não poluir logs em threads
-    #      st.warning(f"Não foi possível extrair ID do Shibata da URL: {shibata_url}.")
-
+                preco_por_metro_val, preco_por_metro_str = calcular_precos_papel(descricao, preco_total)
+                if preco_por_metro_val:
+                     preco_unidade_val = preco_por_metro_val 
+                     preco_unidade_str = preco_por_metro_str.replace('.', ',')
+                
+                # Se ainda for float('inf') ou None, usa o preço total como unitário (fallback)
+                if not preco_unidade_val or preco_unidade_val == float('inf') or preco_unidade_val == 0: 
+                     preco_unidade_val = preco_total
+                
+                p['preco_unidade_val'] = preco_unidade_val
+                p['preco_unidade_str'] = preco_unidade_str 
+                p['imagem_url'] = shibata_imagem_url # Armazena a URL da imagem no produto
+                
+                # --- Fim da lógica de cálculo ---
+                
+                produtos_shibata_processados.append(p)
+    # Ordena todos os produtos encontrados para pegar o melhor preço
     produtos_shibata_ordenados = sorted(produtos_shibata_processados, key=lambda x: x['preco_unidade_val'])
 
     # ----------------------------------------------------------------------
-    # 2. Busca e Processamento Nagumo (POR SKU)
+    # 2. Busca e Processamento Nagumo (POR SKU) - AJUSTADO PARA LIDAR COM LISTA
     # ----------------------------------------------------------------------
     produtos_nagumo_processados = []
-    nagumo_url = item['nagumo']
+    nagumo_urls = item.get('nagumo', [])
     
-    sku_match_list = re.findall(r'(\d+)', nagumo_url.split('?')[0])
-    sku = sku_match_list[-1] if sku_match_list else None
+    # *** NOVO: Trata se for string (legado) ou lista ***
+    if isinstance(nagumo_urls, str):
+        nagumo_urls = [nagumo_urls] if nagumo_urls else []
+    # ****************************************************
     
     nagumo_imagem_url = None
     
-    if sku and sku.isdigit():
-        produto = buscar_detalhes_nagumo_por_sku(sku)
+    for nagumo_url in nagumo_urls:
+        if not nagumo_url:
+            continue
+            
+        sku_match_list = re.findall(r'(\d+)', nagumo_url.split('?')[0])
+        sku = sku_match_list[-1] if sku_match_list else None
         
-        if produto and (produto.get('stock', 0) > 0 or produto.get('stock') is None):
-            preco_normal = produto.get("price", 0)
-            promocao = produto.get("promotion") or {}
-            cond = promocao.get("conditions") or []
-            preco_desconto = None
-            if promocao.get("isActive") and isinstance(cond, list) and len(cond) > 0:
-                preco_desconto = cond[0].get("price")
-            preco_exibir = preco_desconto if preco_desconto else preco_normal
+        if sku and sku.isdigit():
+            produto = buscar_detalhes_nagumo_por_sku(sku)
             
-            # *** LÓGICA DE IMAGEM NAGUMO ***
-            photos = produto.get('photosUrl')
-            if photos and isinstance(photos, list) and len(photos) > 0:
-                nagumo_imagem_url = photos[0]
-            # ******************************
+            if produto and (produto.get('stock', 0) > 0 or produto.get('stock') is None):
+                preco_normal = produto.get("price", 0)
+                promocao = produto.get("promotion") or {}
+                cond = promocao.get("conditions") or []
+                preco_desconto = None
+                if promocao.get("isActive") and isinstance(cond, list) and len(cond) > 0:
+                    preco_desconto = cond[0].get("price")
+                preco_exibir = preco_desconto if preco_desconto else preco_normal
+                
+                # *** LÓGICA DE IMAGEM NAGUMO ***
+                photos = produto.get('photosUrl')
+                if photos and isinstance(photos, list) and len(photos) > 0 and not nagumo_imagem_url: # Pega a primeira imagem válida
+                    nagumo_imagem_url = photos[0]
+                # ******************************
 
-            produto['preco_unitario_str'] = calcular_preco_unitario_nagumo(preco_exibir, produto.get('description', ''), produto['name'], produto.get("unit"))
-            produto['preco_unitario_valor'] = extrair_valor_unitario(produto['preco_unitario_str'])
-            
-            produtos_nagumo_processados.append(produto)
-    # else: # Removido para não poluir logs em threads
-    #     st.warning(f"Não foi possível extrair SKU do Nagumo da URL: {nagumo_url}")
+                produto['preco_unitario_str'] = calcular_preco_unitario_nagumo(preco_exibir, produto.get('description', ''), produto['name'], produto.get("unit"))
+                produto['preco_unitario_valor'] = extrair_valor_unitario(produto['preco_unitario_str'])
+                
+                produtos_nagumo_processados.append(produto)
 
     produtos_nagumo_ordenados = sorted(produtos_nagumo_processados, key=lambda x: x['preco_unitario_valor'])
 
@@ -642,8 +656,9 @@ def processar_item(item):
         "nome_exibicao": nome_exibicao,
         "preco_principal_str": preco_principal_str,
         "imagem_principal": imagem_principal,
-        "nagumo": item['nagumo'], 
-        "shibata": item['shibata'], 
+        # Guarda as URLs como string para exibição/links
+        "nagumo": str(item.get('nagumo', '')), 
+        "shibata": str(item.get('shibata', '')), 
         "shibata_preco_val": preco_shibata_val,
         "nagumo_preco_val": preco_nagumo_val,
         "shibata_preco_str": preco_shibata_str, 

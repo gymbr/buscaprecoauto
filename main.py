@@ -807,11 +807,13 @@ st.markdown("""
         footer {visibility: hidden;}
         #MainMenu {visibility: hidden;}
         
+        /* *** AJUSTE PRINCIPAL AQUI: Borda apenas na parte inferior *** */
         .comparison-item {
-            border: 1px solid #ddd;
-            border-radius: 8px;
+            border: none; /* Remove todas as bordas */
+            border-bottom: 1px solid #ddd; /* Adiciona apenas a borda inferior */
+            border-radius: 0; /* Remove o border-radius */
             padding: 10px;
-            margin-bottom: 10px;
+            margin-bottom: 0px; /* Reduz a margem inferior para a borda ficar mais coesa */
             display: grid; /* Usa grid */
             grid-template-columns: 80px 1fr; /* 80px para imagem, resto para info */
             grid-template-rows: auto auto auto; /* 3 linhas */
@@ -823,6 +825,8 @@ st.markdown("""
             min-height: 90px; 
             overflow: hidden; 
         }
+        /* *************************************************************** */
+        
         .product-image {
             grid-area: image;
             width: 80px;

@@ -890,7 +890,7 @@ resultados_comparacao = st.session_state.resultados_comparacao
 if resultados_comparacao:
     
     # Adicionar o campo de pesquisa (filtro)
-    termo_pesquisa = st.text_input("🔎 Digite o nome do produto:", placeholder="Digite parte do nome do produto...")
+    termo_pesquisa = st.text_input("🔎 Digite o nome do produto:", placeholder="Digite o nome do produto...")
     
     resultados_filtrados = []
     if termo_pesquisa:

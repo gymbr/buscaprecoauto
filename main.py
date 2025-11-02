@@ -825,6 +825,10 @@ st.markdown("""
             min-height: 90px; 
             overflow: hidden; 
         }
+        /* *** NOVO: Adiciona a borda superior apenas ao primeiro item da lista *** */
+        .comparison-item.first-comparison-item {
+            border-top: 1px solid #ddd;
+        }
         /* *************************************************************** */
         
         .product-image {
@@ -907,7 +911,14 @@ if resultados_comparacao:
     TOLERANCE = 0.001
 
     # Exibe os resultados na lista formatada
-    for item in resultados_filtrados:
+    for index, item in enumerate(resultados_filtrados): # *** ADICIONADO ENUMERATE ***
+        
+        # *** LÓGICA PARA ADICIONAR A CLASSE APENAS AO PRIMEIRO ITEM ***
+        extra_class = ""
+        if index == 0:
+            extra_class = " first-comparison-item"
+        # **************************************************************
+
         # Valores para comparação
         shibata_val = item['shibata_preco_val']
         nagumo_val = item['nagumo_preco_val']
@@ -978,7 +989,7 @@ if resultados_comparacao:
         # Bloco HTML
         # item['shibata'] e item['nagumo'] AGORA contêm a URL do produto com o MELHOR PREÇO.
         st.markdown(f"""
-<div class='comparison-item'>
+<div class='comparison-item{extra_class}'>
     <img src="{img_src}" class='product-image' alt="{nome_original}" />
     <div class='price-badge'>
     <span style="font-weight: bold; font-size: 1.15em; line-height: 1.2;">{nome_original}</span>

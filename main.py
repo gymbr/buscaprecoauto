@@ -621,7 +621,7 @@ def realizar_comparacao_automatica():
     return resultados_finais
 
 # ----------------------------------------------------------------------
-# CONFIGURAÇÃO E EXIBIÇÃO DO STREAMLIT (AJUSTADO PARA NOVO LAYOUT)
+# CONFIGURAÇÃO E EXIBIÇÃO DO STREAMLIT (AJUSTADO PARA NOVO LAYOUT E ESTILO)
 # ----------------------------------------------------------------------
 st.set_page_config(page_title="Comparador de Preços", page_icon="🛒", layout="wide")
 
@@ -643,7 +643,7 @@ st.markdown("""
                 "image title"
                 "image shibata"
                 "image nagumo";
-            gap: 2px 10px; /* 2px gap linha, 10px gap coluna */
+            gap: 1px 10px; /* 2px gap linha, 10px gap coluna */
             min-height: 90px; 
             overflow: hidden; 
         }
@@ -670,20 +670,20 @@ st.markdown("""
             white-space: nowrap; 
             overflow: hidden; 
             text-overflow: ellipsis; 
+            color: red; /* CORREÇÃO: Define a cor vermelha para todos os links, conforme solicitado */
         }
         .shibata-link { 
             grid-area: shibata;
-            color: #880000; 
         }
         .nagumo-link { 
             grid-area: nagumo;
-            color: #004488; 
         }
         .logo-pequeno {
             vertical-align: middle; 
             margin-right: 5px;
-            height: 16px; 
-            width: auto;
+            height: 60px; /* CORREÇÃO: Tamanho dos logos unificado */
+            width: 60px; /* CORREÇÃO: Tamanho dos logos unificado */
+            object-fit: contain;
         }
     </style>
 """, unsafe_allow_html=True)
@@ -714,8 +714,10 @@ if resultados_comparacao:
             is_shibata_melhor = False # Ambos indisponíveis, não há melhor
 
         
-        shibata_link_style = "color: red; font-weight: bold;" if is_shibata_melhor and shibata_disponivel else "color: #880000;"
-        nagumo_link_style = "color: red; font-weight: bold;" if not is_shibata_melhor and nagumo_disponivel else "color: #004488;"
+        # CORREÇÃO: A cor vermelha agora é definida na classe CSS .market-link.
+        # Mantive a lógica de 'font-weight: bold' para destacar o melhor preço, mas usei o vermelho fixo.
+        shibata_link_style = "font-weight: bold;" if is_shibata_melhor and shibata_disponivel else ""
+        nagumo_link_style = "font-weight: bold;" if not is_shibata_melhor and nagumo_disponivel else ""
         
         # Strings de preço para os links
         shibata_preco_str_final = item['shibata_preco_str'] if shibata_disponivel else "N/D"
@@ -730,7 +732,7 @@ if resultados_comparacao:
         if not img_src:
              img_src = DEFAULT_IMAGE_URL
 
-        # Bloco HTML CORRIGIDO: Agora exibe a string combinada (nome original + preço)
+        # Bloco HTML CORRIGIDO: Adicionei estilo inline para o fundo branco do Shibata e apliquei os estilos de link.
         st.markdown(f"""
 <div class='comparison-item'>
     <img src="{img_src}" class='product-image' alt="{nome_original}" />
@@ -738,10 +740,16 @@ if resultados_comparacao:
     <span style="font-weight: bold; font-size: 1.15em; line-height: 1.2;">{nome_original}</span>
     </div>
     <a href="{item['shibata']}" target="_blank" class='market-link shibata-link' style="{shibata_link_style}">
-        <img src="{LOGO_SHIBATA_URL}" class='logo-pequeno' alt="Logo Shibata"/> Shibata: {shibata_preco_str_final}
+<img src="{LOGO_SHIBATA_URL}" class='logo-pequeno' style="background-color: white;
+  padding: 2px 2px;       
+  border-radius: 6px;        
+  overflow: hidden;          
+  height: 22px;" alt="Logo Shibata"/> {shibata_preco_str_final}
     </a>
     <a href="{item['nagumo']}" target="_blank" class='market-link nagumo-link' style="{nagumo_link_style}">
-        <img src="{LOGO_NAGUMO_URL}" class='logo-pequeno' alt="Logo Nagumo"/> Nagumo: {nagumo_preco_str_final}
+        <img src="{LOGO_NAGUMO_URL}" class='logo-pequeno' style="background-color: white; 
+  border-radius: 6px;                  
+  height: 24px;object-fit: cover;" alt="Logo Nagumo"/> {nagumo_preco_str_final}
     </a>
 </div>
 """, unsafe_allow_html=True)

@@ -218,24 +218,35 @@
     ]
   },
   {
-    "nome": "🍑 Caqui",
-    "nagumo": [],
-    "shibata": []
+    "nome": "🥩 Carne Acém Picado R$29,98",
+    "nagumo": [
+      "https://www.nagumo.com/p/252404"
+    ],
+    "shibata": [
+      "https://www.loja.shibata.com.br/produto/9937/cubos-de-acem-congelado-swift-pacote-500g",
+      "https://www.loja.shibata.com.br/produto/44348/cubos-de-acem-congelado-swift-pacote-1kg",
+      "https://www.loja.shibata.com.br/produto/16231/pedaco-de-acem-friboi-reserva-aprox-1kg"
+    ]
   },
   {
-    "nome": "🥩 Carne Acém Picado R$32,90",
-    "nagumo": [],
-    "shibata": []
+    "nome": "🥩 Carne Acém Moído R$29,98",
+    "nagumo": [
+      "https://www.nagumo.com/p/252404"
+    ],
+    "shibata": [
+      "https://www.loja.shibata.com.br/produto/9937/cubos-de-acem-congelado-swift-pacote-500g",
+      "https://www.loja.shibata.com.br/produto/44348/cubos-de-acem-congelado-swift-pacote-1kg",
+      "https://www.loja.shibata.com.br/produto/16231/pedaco-de-acem-friboi-reserva-aprox-1kg"
+    ]
   },
   {
-    "nome": "🥩 Carne Acém Moído R$32,90",
-    "nagumo": [],
-    "shibata": []
-  },
-  {
-    "nome": "🥩 Carne Miolo de Acém Bife",
-    "nagumo": [],
-    "shibata": []
+    "nome": "🥩 Carne Miolo de Acém Bife R$38,90",
+    "nagumo": [
+      "https://www.nagumo.com/p/208570"
+    ],
+    "shibata": [
+      "https://www.loja.shibata.com.br/produto/16740/bandeja-miolo-de-acem-com-aprox-11kg"
+    ]
   },
   {
     "nome": "🥕 Cenoura R$2,99",

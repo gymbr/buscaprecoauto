@@ -127,13 +127,28 @@
   },
   {
     "nome": "🥖 Bisnaguinha R$6,00",
-    "nagumo": [],
-    "shibata": []
+    "nagumo": [
+      "https://www.nagumo.com/p/243643"
+    ],
+    "shibata": [
+      "https://www.loja.shibata.com.br/produto/307/pao-bisnaguinha-panco-originais-pacote-300g"
+    ]
   },
   {
-    "nome": "🍪 Bolacha R$1,98",
-    "nagumo": [],
-    "shibata": []
+    "nome": "🍪 Bolacha R$15,23",
+    "nagumo": [
+      "https://www.nagumo.com/p/829724",
+      "https://www.nagumo.com/p/218324",
+      "https://www.nagumo.com/p/268071",
+      "https://www.nagumo.com/p/836241"
+    ],
+    "shibata": [
+      "https://www.loja.shibata.com.br/produto/48155/biscoito-chocolate-recheio-limao-minions-adria-plugados-pacote-120g",
+      "https://www.loja.shibata.com.br/produto/7604/biscoito-recheado-plugados-quadrado-sabor-morango-130g",
+      "https://www.loja.shibata.com.br/produto/1889/biscoito-baunilha-recheio-chocolate-bauducco-pacote-140g",
+      "https://www.loja.shibata.com.br/produto/9401/biscoito-recheio-morango-passatempo-pacote-130g",
+      "https://www.loja.shibata.com.br/produto/6695/biscoito-sabor-recheio-sabor-morango-trakinas-pacote-126g"
+    ]
   },
   {
     "nome": "🍰 Bolo Oetker formigueiro R$4,98",

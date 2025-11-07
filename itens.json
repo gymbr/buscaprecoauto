@@ -257,8 +257,15 @@
   },
   {
     "nome": "🧂 Chimichurri",
-    "nagumo": [],
-    "shibata": []
+    "nagumo": [
+      "https://www.nagumo.com/p/195522",
+      "https://www.nagumo.com/p/254122"
+    ],
+    "shibata": [
+      "https://www.loja.shibata.com.br/produto/6989/chimichurri-a-ervas-30g",
+      "https://www.loja.shibata.com.br/produto/2664/xondim-kitano-ct-12g-chimichurri",
+      "https://www.loja.shibata.com.br/produto/37346/chimichurri-kisabor-pacote-15g"
+    ]
   },
   {
     "nome": "🍫 Chocolate",

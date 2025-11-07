@@ -184,8 +184,16 @@
   },
   {
     "nome": "🛒 Calabresa",
-    "nagumo": [],
-    "shibata": []
+    "nagumo": [
+      "https://www.nagumo.com/p/259918",
+      "https://www.nagumo.com/p/7283",
+      "https://www.nagumo.com/p/3599"
+    ],
+    "shibata": [
+      "https://www.loja.shibata.com.br/produto/44046/linguica-calabresa-cozida-e-defumada-sadia-400g",
+      "https://www.loja.shibata.com.br/produto/16471/linguica-calabresa-aurora-2-unidades-aprox-550g",
+      "https://www.loja.shibata.com.br/produto/16466/linguica-calabresa-sadia-2-unidades-aprox-550g"
+    ]
   },
   {
     "nome": "🧴 Cândida",

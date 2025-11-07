@@ -183,7 +183,7 @@
     ]
   },
   {
-    "nome": "🛒 Calabresa",
+    "nome": "🛒 Calabresa R$21,98",
     "nagumo": [
       "https://www.nagumo.com/p/259918",
       "https://www.nagumo.com/p/7283",
@@ -196,9 +196,26 @@
     ]
   },
   {
-    "nome": "🧴 Cândida",
-    "nagumo": [],
-    "shibata": []
+    "nome": "🧴 Cândida R$1,99",
+    "nagumo": [
+      "https://www.nagumo.com/p/836975",
+      "https://www.nagumo.com/p/402187",
+      "https://www.nagumo.com/p/836982",
+      "https://www.nagumo.com/p/906425",
+      "https://www.nagumo.com/p/402194",
+      "https://www.nagumo.com/p/257907",
+      "https://www.nagumo.com/p/809948",
+      "https://www.nagumo.com/p/818704"
+    ],
+    "shibata": [
+      "https://www.loja.shibata.com.br/produto/14403/agua-sanitaria-candura-cloro-ativo-1l",
+      "https://www.loja.shibata.com.br/produto/8943/agua-sanitaria-candura-cloro-ativo-2l",
+      "https://www.loja.shibata.com.br/produto/9121/agua-sanitaria-ype-frasco-2l",
+      "https://www.loja.shibata.com.br/produto/8951/agua-sanitaria-suprema-cloro-ativo-1l",
+      "https://www.loja.shibata.com.br/produto/12309/agua-sanitaria-ype-galao-5l",
+      "https://www.loja.shibata.com.br/produto/12533/agua-sanitaria-suprema-cloro-ativo-2l",
+      "https://www.loja.shibata.com.br/produto/5332/agua-sanitaria-suprema-galao-5l"
+    ]
   },
   {
     "nome": "🍑 Caqui",

@@ -303,8 +303,14 @@
   },
   {
     "nome": "🧹 Cotonete",
-    "nagumo": [],
-    "shibata": []
+    "nagumo": [
+      "https://www.nagumo.com/p/254950",
+      "https://www.nagumo.com/p/267135"
+    ],
+    "shibata": [
+      "https://www.loja.shibata.com.br/produto/21413/hastes-flexiveis-uni-care-caixa-150-unidades",
+      "https://www.loja.shibata.com.br/produto/19465/hastes-flexiveis-uni-care-caixa-75-unidades"
+    ]
   },
   {
     "nome": "🥬 Couve",

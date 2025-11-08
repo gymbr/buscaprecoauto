@@ -526,8 +526,16 @@
   },
   {
     "nome": "🍝 Macarrão R$2,98",
-    "nagumo": [],
-    "shibata": []
+    "nagumo": [
+      "https://www.nagumo.com/p/282307",
+      "https://www.nagumo.com/p/282376"
+    ],
+    "shibata": [
+      "https://www.loja.shibata.com.br/produto/12963/macarrao-de-semola-com-ovos-espaguete-8-adria-pacote-500g",
+      "https://www.loja.shibata.com.br/produto/11139/macarrao-de-semola-com-ovos-parafuso-adria-pacote-500g",
+      "https://www.loja.shibata.com.br/produto/14756/macarrao-com-ovos-dona-benta-parafuso-500g",
+      "https://www.loja.shibata.com.br/produto/12896/macarrao-com-ovos-dona-benta-espaguete-n8-500g"
+    ]
   },
   {
     "nome": "🥭 Mamão",

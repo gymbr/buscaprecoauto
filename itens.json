@@ -357,14 +357,14 @@
     ]
   },
   {
-    "nome": "🧴 Desinfetante R$7,99",
-    "nagumo": [],
-    "shibata": []
-  },
-  {
-    "nome": "🧴 Desinfetante Suprema 2l R$4,59",
-    "nagumo": [],
-    "shibata": []
+    "nome": "🧴 Desinfetante R$2,19",
+    "nagumo": [
+      "https://www.nagumo.com/p/828598"
+    ],
+    "shibata": [
+      "https://www.loja.shibata.com.br/produto/3438/desinfetante-flores-do-campo-suprema-2-litros",
+      "https://www.loja.shibata.com.br/produto/12765/limpador-perfumado-veja-flores-do-mediterraneo-2l"
+    ]
   },
   {
     "nome": "🛒 Desodorante Herbíssimo",

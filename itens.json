@@ -440,9 +440,27 @@
     "shibata": []
   },
   {
-    "nome": "🥛 Leite R$3,98",
-    "nagumo": [],
-    "shibata": []
+    "nome": "🥛 Leite R$3,89",
+    "nagumo": [
+      "https://www.nagumo.com/p/301602",
+      "https://www.nagumo.com/p/497442",
+      "https://www.nagumo.com/p/532402",
+      "https://www.nagumo.com/p/444644",
+      "https://www.nagumo.com/p/788274",
+      "https://www.nagumo.com/p/312738"
+    ],
+    "shibata": [
+      "https://www.loja.shibata.com.br/produto/15643/leite-uht-integral-parmalat-garrafa-1l",
+      "https://www.loja.shibata.com.br/produto/43303/leite-uht-integral-paulista-caixa-com-tampa-1l",
+      "https://www.loja.shibata.com.br/produto/14512/leite-uht-integral-lider-caixa-1l",
+      "https://www.loja.shibata.com.br/produto/15500/leite-uht-integral-jussara-caixa-com-tampa-1l",
+      "https://www.loja.shibata.com.br/produto/3665/leite-uht-integral-italac-caixa-com-tampa-1l",
+      "https://www.loja.shibata.com.br/produto/11158/leite-uht-com-tampa-integral-parmalat-caixa-1l",
+      "https://www.loja.shibata.com.br/produto/38692/leite-uht-integral-piracanjuba-caixa-com-tampa-1l",
+      "https://www.loja.shibata.com.br/produto/12987/leite-longa-vida-batavo-integral-caixa-com-tampa-1l",
+      "https://www.loja.shibata.com.br/produto/39019/leite-integral-uht-aurora-caixa-com-tampa-1l",
+      "https://www.loja.shibata.com.br/produto/22668/leite-uht-integral-hercules-caixa-1l"
+    ]
   },
   {
     "nome": "🥛 Leite condensado R$5,29",

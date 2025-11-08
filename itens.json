@@ -504,8 +504,14 @@
   },
   {
     "nome": "🧴 Lustra móveis",
-    "nagumo": [],
-    "shibata": []
+    "nagumo": [
+      "https://www.nagumo.com/p/240708"
+    ],
+    "shibata": [
+      "https://www.loja.shibata.com.br/produto/32384/lustras-moveis-peroba-flores-do-campo-200ml",
+      "https://www.loja.shibata.com.br/produto/13049/lustra-moveis-destac-lavanda-500ml",
+      "https://www.loja.shibata.com.br/produto/38565/lustra-moveis-uni-lavanda-squeeze-500ml"
+    ]
   },
   {
     "nome": "🍎 Maçã Red/Gala R$9,99",

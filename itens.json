@@ -287,8 +287,19 @@
   },
   {
     "nome": "🧂 Colorífico 200g R$5,79",
-    "nagumo": [],
-    "shibata": []
+    "nagumo": [
+      "https://www.nagumo.com/p/262040",
+      "https://www.nagumo.com/p/108805",
+      "https://www.nagumo.com/p/461887",
+      "https://www.nagumo.com/p/255401"
+    ],
+    "shibata": [
+      "https://www.loja.shibata.com.br/produto/5533/colorifico-aroma-das-ervas-90g",
+      "https://www.loja.shibata.com.br/produto/10901/colorifico-aromas-das-indias-kisabor-sache-80g",
+      "https://www.loja.shibata.com.br/produto/7541/colorifico-kisabor-sache-70g",
+      "https://www.loja.shibata.com.br/produto/41471/colorifico-po-kitano-pacote-180g",
+      "https://www.loja.shibata.com.br/produto/2224/colorifico-kisabor-sache-200g"
+    ]
   },
   {
     "nome": "🧹 Cotonete",

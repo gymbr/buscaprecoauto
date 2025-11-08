@@ -493,8 +493,14 @@
   },
   {
     "nome": "🍃 Louro",
-    "nagumo": [],
-    "shibata": []
+    "nagumo": [
+      "https://www.nagumo.com/p/466004",
+      "https://www.nagumo.com/p/153492"
+    ],
+    "shibata": [
+      "https://www.loja.shibata.com.br/produto/12960/folha-de-louro-kitano-4g",
+      "https://www.loja.shibata.com.br/produto/3912/folha-de-louro-kisabor-pacote-4g"
+    ]
   },
   {
     "nome": "🧴 Lustra móveis",

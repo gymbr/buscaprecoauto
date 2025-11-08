@@ -344,9 +344,17 @@
     "shibata": []
   },
   {
-    "nome": "🥛 Danone kg R$5,99",
-    "nagumo": [],
-    "shibata": []
+    "nome": "🥛 Danone R$5,99",
+    "nagumo": [
+      "https://www.nagumo.com/p/252333",
+      "https://www.nagumo.com/p/263011",
+      "https://www.nagumo.com/p/252310"
+    ],
+    "shibata": [
+      "https://www.loja.shibata.com.br/produto/27825/iogurte-milk-mix-serramar-parcialmente-desnatado-com-preparado-de-morango-garrafa-900g",
+      "https://www.loja.shibata.com.br/produto/44548/iogurte-milk-mix-serramar-parcialmente-desnatado-com-preparado-de-morango-garrafa-1250g",
+      "https://www.loja.shibata.com.br/produto/27854/iogurte-milk-mix-serramar-parcialmente-desnatado-com-preparado-de-morango-saco-1kg"
+    ]
   },
   {
     "nome": "🧴 Desinfetante R$7,99",

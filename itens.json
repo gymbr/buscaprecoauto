@@ -377,9 +377,15 @@
     "shibata": []
   },
   {
-    "nome": "🧴 Detergente",
-    "nagumo": [],
-    "shibata": []
+    "nome": "🧴 Detergente R$2,06",
+    "nagumo": [
+      "https://www.nagumo.com/p/206210",
+      "https://www.nagumo.com/p/359504"
+    ],
+    "shibata": [
+      "https://www.loja.shibata.com.br/produto/6088/detergente-clear-ype-com-6-unidades-de-500ml-10-de-desconto",
+      "https://www.loja.shibata.com.br/produto/7121/detergente-ype-clear-squeeze-500ml"
+    ]
   },
   {
     "nome": "🪥 Escova",

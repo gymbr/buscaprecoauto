@@ -319,8 +319,24 @@
   },
   {
     "nome": "🥛 Creme de Leite",
-    "nagumo": [],
-    "shibata": []
+    "nagumo": [
+      "https://www.nagumo.com/p/264267",
+      "https://www.nagumo.com/p/258391",
+      "https://www.nagumo.com/p/368506",
+      "https://www.nagumo.com/p/103787",
+      "https://www.nagumo.com/p/210552",
+      "https://www.nagumo.com/p/403238"
+    ],
+    "shibata": [
+      "https://www.loja.shibata.com.br/produto/14245/creme-de-leite-uht-leve-homogeneizado-original-nestle-caixa-200g",
+      "https://www.loja.shibata.com.br/produto/43319/creme-de-leite-uht-leve-homogeneizado-paulista-caixa-200g",
+      "https://www.loja.shibata.com.br/produto/17132/creme-de-leite-uht-parmalat-levissimo-caixa-200g",
+      "https://www.loja.shibata.com.br/produto/25748/creme-de-leite-uht-leve-homogeneizado-piracanjuba-caixa-200g",
+      "https://www.loja.shibata.com.br/produto/8755/creme-de-leite-uht-leve-homogeneizado-lider-caixa-200g",
+      "https://www.loja.shibata.com.br/produto/2796/creme-de-leite-uht-leve-homogeneizado-triangulo-mineiro-caixa-200g",
+      "https://www.loja.shibata.com.br/produto/5351/creme-de-leite-homogeneizado-jussara-caixa-200g",
+      "https://www.loja.shibata.com.br/produto/89041/creme-de-leite-uht-leve-homogeneizado-parmalat-caixa-200g"
+    ]
   },
   {
     "nome": "🌾 Cuscuz",

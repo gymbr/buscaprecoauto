@@ -515,8 +515,14 @@
   },
   {
     "nome": "🍎 Maçã Red/Gala R$9,99",
-    "nagumo": [],
-    "shibata": []
+    "nagumo": [
+      "https://www.nagumo.com/p/2141",
+      "https://www.nagumo.com/p/234315"
+    ],
+    "shibata": [
+      "https://www.loja.shibata.com.br/produto/16491/maca-gala-1-unidade",
+      "https://www.loja.shibata.com.br/produto/16724/maca-red-importada-1-unidade"
+    ]
   },
   {
     "nome": "🍝 Macarrão R$2,98",

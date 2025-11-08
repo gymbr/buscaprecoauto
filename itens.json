@@ -268,9 +268,15 @@
     ]
   },
   {
-    "nome": "🍫 Chocolate",
-    "nagumo": [],
-    "shibata": []
+    "nome": "🍫 Chocolate R$57,60",
+    "nagumo": [
+      "https://www.nagumo.com/p/255838",
+      "https://www.nagumo.com/p/267155"
+    ],
+    "shibata": [
+      "https://www.loja.shibata.com.br/produto/41004/chocolate-ao-leite-com-recheio-cremoso-sonho-de-valsa-lacta-recheados-pacote-98g",
+      "https://www.loja.shibata.com.br/produto/47531/chocolate-ao-leite-recheio-caramelo-lacta-recheados-pacote-104g"
+    ]
   },
   {
     "nome": "🍫 Chocotone",

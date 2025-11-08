@@ -554,8 +554,14 @@
   },
   {
     "nome": "🧈 Margarina R$7,49",
-    "nagumo": [],
-    "shibata": []
+    "nagumo": [
+      "https://www.nagumo.com/p/474979",
+      "https://www.nagumo.com/p/121385"
+    ],
+    "shibata": [
+      "https://www.loja.shibata.com.br/produto/8815/margarina-qualy-com-sal-500g",
+      "https://www.loja.shibata.com.br/produto/4356/margarina-cremosa-com-sal-doriana-500g"
+    ]
   },
   {
     "nome": "🍝 Massa Lasanha 500g R$6,89",

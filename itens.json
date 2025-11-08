@@ -468,8 +468,18 @@
   },
   {
     "nome": "🥛 Leite condensado R$5,29",
-    "nagumo": [],
-    "shibata": []
+    "nagumo": [
+      "https://www.nagumo.com/p/870511",
+      "https://www.nagumo.com/p/856317",
+      "https://www.nagumo.com/p/260042",
+      "https://www.nagumo.com/p/510790"
+    ],
+    "shibata": [
+      "https://www.loja.shibata.com.br/produto/4/leite-condensado-semidesnatado-piracanjuba-caixa-395g",
+      "https://www.loja.shibata.com.br/produto/19/leite-condensado-semi-desnatado-italac-caixa-395g",
+      "https://www.loja.shibata.com.br/produto/43316/leite-condensado-semidesnatado-paulista-caixa-395g",
+      "https://www.loja.shibata.com.br/produto/47933/leite-condensado-semidesnatado-parmalat-levissimo-caixa-395g"
+    ]
   },
   {
     "nome": "🛒 Linguiça de frango",

@@ -808,14 +808,23 @@
     ]
   },
   {
-    "nome": "🧴 Sabonete líquido 2l R$21,90",
+    "nome": "🧴 Sabonete líquido 2l R$10,95",
     "nagumo": [],
-    "shibata": []
+    "shibata": [
+      "https://www.loja.shibata.com.br/produto/24644/sabonete-liquido-para-maos-floral-uni-care-frasco-1l",
+      "https://www.loja.shibata.com.br/produto/24682/sabonete-liquido-para-maos-floral-uni-care-frasco-2l"
+    ]
   },
   {
-    "nome": "🧂 Sal",
-    "nagumo": [],
-    "shibata": []
+    "nome": "🧂 Sal R$1,65",
+    "nagumo": [
+      "https://www.nagumo.com/p/322492",
+      "https://www.nagumo.com/p/309950"
+    ],
+    "shibata": [
+      "https://www.loja.shibata.com.br/produto/1604/sal-refinado-tradicional-cisne-pacote-1kg",
+      "https://www.loja.shibata.com.br/produto/22280/sal-refinado-iodado-garca-pacote-1kg"
+    ]
   },
   {
     "nome": "🌭 Salsicha Perdigão R$12,90",
@@ -823,14 +832,22 @@
     "shibata": []
   },
   {
-    "nome": "🛒 Sazón feijão",
-    "nagumo": [],
-    "shibata": []
+    "nome": "🛒 Sazón feijão R$82,50",
+    "nagumo": [
+      "https://www.nagumo.com/p/118392"
+    ],
+    "shibata": [
+      "https://www.loja.shibata.com.br/produto/12381/tempero-po-para-feijao-sazon-pacote-com-12-unidades-de-5g-cada-60g"
+    ]
   },
   {
-    "nome": "🛒 Sazón Massa",
-    "nagumo": [],
-    "shibata": []
+    "nome": "🛒 Sazón Massa R$82,50",
+    "nagumo": [
+      "https://www.nagumo.com/p/118385"
+    ],
+    "shibata": [
+      "https://www.loja.shibata.com.br/produto/14258/tempero-po-para-massas-sazon-pacote-com-12-unidades-5g-cada-60g"
+    ]
   },
   {
     "nome": "🧴 Shampoo Clear Men",

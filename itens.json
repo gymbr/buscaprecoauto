@@ -783,9 +783,20 @@
     "shibata": []
   },
   {
-    "nome": "🧼 Sabão em pó",
-    "nagumo": [],
-    "shibata": []
+    "nome": "🧼 Sabão em pó R$5",
+    "nagumo": [
+      "https://www.nagumo.com/p/248214",
+      "https://www.nagumo.com/p/234661",
+      "https://www.nagumo.com/p/254672",
+      "https://www.nagumo.com/p/262343",
+      "https://www.nagumo.com/p/253776",
+      "https://www.nagumo.com/p/264455"
+    ],
+    "shibata": [
+      "https://www.loja.shibata.com.br/produto/22805/sabao-em-po-tixan-ype-primavera-caixa-800g",
+      "https://www.loja.shibata.com.br/produto/23715/sabao-em-po-tixan-ype-primavera-sache-24kg",
+      "https://www.loja.shibata.com.br/produto/43076/sabao-em-po-tixan-ype-primavera-caixa-22kg"
+    ]
   },
   {
     "nome": "🧼 Sabonete Davene R$3,79",

@@ -894,16 +894,28 @@
   {
     "nome": "🍅 Tomate R$6",
     "nagumo": [],
-    "shibata": []
+    "shibata": [
+      "https://www.loja.shibata.com.br/produto/16313/tomate-longa-vida-1-unidade",
+      "https://www.loja.shibata.com.br/produto/16486/tomate-italiano-1-unidade"
+    ]
   },
   {
     "nome": "🍇 Uva R$8,99",
-    "nagumo": [],
-    "shibata": []
+    "nagumo": [
+      "https://www.nagumo.com/p/270834"
+    ],
+    "shibata": [
+      "https://www.loja.shibata.com.br/produto/27425/uva-preta-sem-semente-doce-uva-500g"
+    ]
   },
   {
-    "nome": "🍶 Vinagre R$1,99",
-    "nagumo": [],
-    "shibata": []
+    "nome": "🍶 Vinagre R$2,52",
+    "nagumo": [
+      "https://www.nagumo.com/p/157292"
+    ],
+    "shibata": [
+      "https://www.loja.shibata.com.br/produto/43500/vinagre-de-alcool-vitalia-frasco-750ml",
+      "https://www.loja.shibata.com.br/produto/6033/vinagre-de-alcool-toscano-frasco-750ml"
+    ]
   }
 ]

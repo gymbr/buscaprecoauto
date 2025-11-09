@@ -425,9 +425,14 @@
     ]
   },
   {
-    "nome": "🍔 Hambúrguer R$14,90",
-    "nagumo": [],
-    "shibata": []
+    "nome": "🍔 Hambúrguer R$24,82",
+    "nagumo": [
+      "https://www.nagumo.com/p/276665"
+    ],
+    "shibata": [
+      "https://www.loja.shibata.com.br/produto/7855/hamburguer-texas-burger-672g",
+      "https://www.loja.shibata.com.br/produto/15519/hamburguer-misto-brasa-burguers-56g"
+    ]
   },
   {
     "nome": "🛒 Inseticida",
@@ -574,14 +579,25 @@
     "shibata": []
   },
   {
-    "nome": "🌽 Milho Quero R$3,25",
-    "nagumo": [],
-    "shibata": []
+    "nome": "🌽 Milho Quero R$19,12",
+    "nagumo": [
+      "https://www.nagumo.com/p/220527"
+    ],
+    "shibata": [
+      "https://www.loja.shibata.com.br/produto/15856/milho-verde-em-conserva-quero-lata-170g"
+    ]
   },
   {
     "nome": "🍅 Molho de tomate R$1,59",
-    "nagumo": [],
-    "shibata": []
+    "nagumo": [
+      "https://www.nagumo.com/p/106740",
+      "https://www.nagumo.com/p/254279"
+    ],
+    "shibata": [
+      "https://www.loja.shibata.com.br/produto/47770/molho-de-tomate-tradicional-quero-sache-240g",
+      "https://www.loja.shibata.com.br/produto/41261/molho-de-tomate-tradicional-knorr-gourmet-sache-300g",
+      "https://www.loja.shibata.com.br/produto/14801/molho-de-tomate-tradicional-fugini-sache-300g"
+    ]
   },
   {
     "nome": "🧀 Mussarela R$45",

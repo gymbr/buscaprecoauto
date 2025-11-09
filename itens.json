@@ -738,9 +738,15 @@
     ]
   },
   {
-    "nome": "🍗 Peito de frango R$19,90",
-    "nagumo": [],
-    "shibata": []
+    "nome": "🍗 Peito de frango R$19,98",
+    "nagumo": [
+      "https://www.nagumo.com/p/354196",
+      "https://www.nagumo.com/p/206396"
+    ],
+    "shibata": [
+      "https://www.loja.shibata.com.br/produto/13624/file-de-peito-de-frango-congelado-swift-pacote-1kg",
+      "https://www.loja.shibata.com.br/produto/16661/peito-de-frango-sem-pele-e-sem-osso-bandeja-com-aprox-12kg"
+    ]
   },
   {
     "nome": "🍐 Pêra",

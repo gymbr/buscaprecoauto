@@ -723,9 +723,19 @@
     ]
   },
   {
-    "nome": "🧴 Pasta de dente R$9,79",
-    "nagumo": [],
-    "shibata": []
+    "nome": "🧴 Pasta de dente R$48,33",
+    "nagumo": [
+      "https://www.nagumo.com/p/230170",
+      "https://www.nagumo.com/p/137027",
+      "https://www.nagumo.com/p/220032",
+      "https://www.nagumo.com/p/230160"
+    ],
+    "shibata": [
+      "https://www.loja.shibata.com.br/produto/11295/creme-dental-colgate-tripla-acao-xtra-fresh-caixa-70g",
+      "https://www.loja.shibata.com.br/produto/2096/creme-dental-colgate-tripla-acao-menta-original-caixa-90g",
+      "https://www.loja.shibata.com.br/produto/4534/creme-dental-colgate-tripla-acao-xtra-white-caixa-120g",
+      "https://www.loja.shibata.com.br/produto/15759/creme-dental-colgate-tripla-acao-menta-original-caixa-180g"
+    ]
   },
   {
     "nome": "🍗 Peito de frango R$19,90",

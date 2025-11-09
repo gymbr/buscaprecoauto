@@ -870,8 +870,14 @@
   },
   {
     "nome": "🧂 Tempero Baiano",
-    "nagumo": [],
-    "shibata": []
+    "nagumo": [
+      "https://www.nagumo.com/p/467384",
+      "https://www.nagumo.com/p/262100"
+    ],
+    "shibata": [
+      "https://www.loja.shibata.com.br/produto/8770/tempero-baiano-kisabor-sache-40g",
+      "https://www.loja.shibata.com.br/produto/2534/tempero-nordeste-tipo-baiano-aroma-das-ervas-pacote-80g"
+    ]
   },
   {
     "nome": "☕ Toddy",

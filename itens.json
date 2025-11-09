@@ -665,14 +665,36 @@
     "shibata": []
   },
   {
-    "nome": "🍞 Pão Francês R$0,50",
-    "nagumo": [],
-    "shibata": []
+    "nome": "🍞 Pão Francês R$13",
+    "nagumo": [
+      "https://www.nagumo.com/p/42093"
+    ],
+    "shibata": [
+      "https://www.loja.shibata.com.br/produto/16755/pao-frances-5-unidades-aprox-400g"
+    ]
   },
   {
     "nome": "🧻 Papel higiênico R$15,90",
-    "nagumo": [],
-    "shibata": []
+    "nagumo": [
+      "https://www.nagumo.com/p/266019",
+      "https://www.nagumo.com/p/437813",
+      "https://www.nagumo.com/p/272129",
+      "https://www.nagumo.com/p/264490",
+      "https://www.nagumo.com/p/187749",
+      "https://www.nagumo.com/p/187749",
+      "https://www.nagumo.com/p/264493",
+      "https://www.nagumo.com/p/266016",
+      "https://www.nagumo.com/p/272133",
+      "https://www.nagumo.com/p/265415",
+      "https://www.nagumo.com/p/474849"
+    ],
+    "shibata": [
+      "https://www.loja.shibata.com.br/produto/44405/papel-higienico-folha-dupla-deluxe-cotton-30m-pacote-leve-12-pague-11-unidades",
+      "https://www.loja.shibata.com.br/produto/43360/papel-higienico-folha-dupla-neutro-mimmo-30m-pacote-leve-12-pague-11-unidades",
+      "https://www.loja.shibata.com.br/produto/7112/papel-higienico-folha-dupla-neutro-personal-vip-30m-pacote-4-unidades",
+      "https://www.loja.shibata.com.br/produto/47250/papel-higienico-uni-care-folha-dupla-12-rolos-com-30m-cada",
+      "https://www.loja.shibata.com.br/produto/47252/papel-higienico-uni-soft-folha-dupla-neutro-com-16-rolos-de-30-metros-cada"
+    ]
   },
   {
     "nome": "🧻 Papel toalha",

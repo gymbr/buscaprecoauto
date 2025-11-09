@@ -600,14 +600,34 @@
     ]
   },
   {
-    "nome": "🧀 Mussarela R$45",
-    "nagumo": [],
-    "shibata": []
+    "nome": "🧀 Mussarela R$29,90",
+    "nagumo": [
+      "https://www.nagumo.com/p/144568",
+      "https://www.nagumo.com/p/240650",
+      "https://www.nagumo.com/p/241282",
+      "https://www.nagumo.com/p/231439"
+    ],
+    "shibata": [
+      "https://www.loja.shibata.com.br/produto/41490/queijo-mussarela-scala-light-200g-aprox-8-fatias",
+      "https://www.loja.shibata.com.br/produto/2297/queijo-mussarela-fatiado-president-150g",
+      "https://www.loja.shibata.com.br/produto/14133/queijo-mussarela-fatiado-itambe-150g",
+      "https://www.loja.shibata.com.br/produto/27540/queijo-mussarela-fatiada-aurora-200g-aprox-8-fatias",
+      "https://www.loja.shibata.com.br/produto/16632/queijo-mussarela-premiatta-bandeja-fatiado-200g-aprox-8-fatias",
+      "https://www.loja.shibata.com.br/produto/16578/queijo-mussarela-brq-bandeja-fatiado-200g-aprox-8-fatias",
+      "https://www.loja.shibata.com.br/produto/16694/bandeja-queijo-mussarela-scala-fatiado-200g-aprox-8-fatias"
+    ]
   },
   {
-    "nome": "🛒 Óleo",
-    "nagumo": [],
-    "shibata": []
+    "nome": "🛒 Óleo R$8,77",
+    "nagumo": [
+      "https://www.nagumo.com/p/159623",
+      "https://www.nagumo.com/p/113090"
+    ],
+    "shibata": [
+      "https://www.loja.shibata.com.br/produto/1550/oleo-de-soja-soya-garrafa-900ml",
+      "https://www.loja.shibata.com.br/produto/1553/oleo-de-soja-tipo-1-coamo-garrafa-900ml",
+      "https://www.loja.shibata.com.br/produto/8726/oleo-de-soja-tipo-1-liza-garrafa-900ml"
+    ]
   },
   {
     "nome": "🧂 Orégano",

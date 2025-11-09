@@ -630,18 +630,38 @@
     ]
   },
   {
-    "nome": "🧂 Orégano",
-    "nagumo": [],
-    "shibata": []
+    "nome": "🧂 Orégano R$101,95",
+    "nagumo": [
+      "https://www.nagumo.com/p/361804",
+      "https://www.nagumo.com/p/108799",
+      "https://www.nagumo.com/p/464048"
+    ],
+    "shibata": [
+      "https://www.loja.shibata.com.br/produto/11130/oregano-kitano-10gr",
+      "https://www.loja.shibata.com.br/produto/9327/oregano-kisabor-sache-8g",
+      "https://www.loja.shibata.com.br/produto/12557/oregano-aromas-das-ervas-25g-em-flocos",
+      "https://www.loja.shibata.com.br/produto/1813/oregano-aromas-das-indias-kisabor-sache-15g",
+      "https://www.loja.shibata.com.br/produto/11129/oregano-kisabor-sache-100g",
+      "https://www.loja.shibata.com.br/produto/23760/oregano-kisabor-pacote-200g"
+    ]
   },
   {
-    "nome": "🥚 Ovo 20un R$10,98",
-    "nagumo": [],
-    "shibata": []
+    "nome": "🥚 Ovo R$0,60",
+    "nagumo": [
+      "https://www.nagumo.com/p/353892",
+      "https://www.nagumo.com/p/261318"
+    ],
+    "shibata": [
+      "https://www.loja.shibata.com.br/produto/89076/ovos-brancos-da-granja-shida-extra-pvc-20-unidades",
+      "https://www.loja.shibata.com.br/produto/15362/ovo-mantiqueira-extra-branco-20-unidades"
+    ]
   },
   {
-    "nome": "🦷 Palito de Dente 200un R$2,98",
-    "nagumo": [],
+    "nome": "🦷 Palito de Dente R$0,01",
+    "nagumo": [
+      "https://www.nagumo.com/p/323925",
+      "https://www.nagumo.com/p/332385"
+    ],
     "shibata": []
   },
   {

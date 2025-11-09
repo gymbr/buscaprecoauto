@@ -880,9 +880,16 @@
     ]
   },
   {
-    "nome": "☕ Toddy",
-    "nagumo": [],
-    "shibata": []
+    "nome": "☕ Toddy R$19,94",
+    "nagumo": [
+      "https://www.nagumo.com/p/246188",
+      "https://www.nagumo.com/p/300018"
+    ],
+    "shibata": [
+      "https://www.loja.shibata.com.br/produto/6878/achocolatado-po-original-toddy-economica-pote-750g",
+      "https://www.loja.shibata.com.br/produto/40123/achocolatado-po-original-toddy-pacote-700g",
+      "https://www.loja.shibata.com.br/produto/15960/achocolatado-po-original-toddy-pacote-18kg"
+    ]
   },
   {
     "nome": "🍅 Tomate R$6",

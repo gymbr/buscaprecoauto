@@ -697,9 +697,18 @@
     ]
   },
   {
-    "nome": "🧻 Papel toalha",
-    "nagumo": [],
-    "shibata": []
+    "nome": "🧻 Papel toalha R$0,040",
+    "nagumo": [
+      "https://www.nagumo.com/p/266011",
+      "https://www.nagumo.com/p/893435",
+      "https://www.nagumo.com/p/254728",
+      "https://www.nagumo.com/p/264487"
+    ],
+    "shibata": [
+      "https://www.loja.shibata.com.br/produto/48137/toalha-de-papel-folha-dupla-kitchen-pacote-gigante-550-folhas",
+      "https://www.loja.shibata.com.br/produto/41312/toalha-de-papel-folha-dupla-snob-classica-2-unidades-com-120-folhas-cada-rolo",
+      "https://www.loja.shibata.com.br/produto/46195/toalha-de-papel-uni-lar-com-2-rolos-de-120-folhas-cada"
+    ]
   },
   {
     "nome": "🧂 Páprica defumada",

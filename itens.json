@@ -403,9 +403,21 @@
     "shibata": []
   },
   {
-    "nome": "🌾 Farinha de Trigo Renata R$4,75",
-    "nagumo": [],
-    "shibata": []
+    "nome": "🌾 Farinha de Trigo R$3,99",
+    "nagumo": [
+      "https://www.nagumo.com/p/752121",
+      "https://www.nagumo.com/p/268620",
+      "https://www.nagumo.com/p/210140",
+      "https://www.nagumo.com/p/250793",
+      "https://www.nagumo.com/p/291767"
+    ],
+    "shibata": [
+      "https://www.loja.shibata.com.br/produto/11088/farinha-de-trigo-tipo-1-tradicional-dona-benta-pacote-1kg",
+      "https://www.loja.shibata.com.br/produto/7511/farinha-de-trigo-tipo-1-rosa-branca-pacote-1kg",
+      "https://www.loja.shibata.com.br/produto/12919/farinha-de-trigo-tipo-1-tradicional-sol-pacote-1kg",
+      "https://www.loja.shibata.com.br/produto/47423/farinha-de-trigo-tipo-1-tradicional-renata-dia-a-dia-pacote-1kg",
+      "https://www.loja.shibata.com.br/produto/44584/farinha-de-trigo-tipo-1-tradicional-farina-pacote-1kg"
+    ]
   },
   {
     "nome": "🌾 Farofa Yoki R$4,95",

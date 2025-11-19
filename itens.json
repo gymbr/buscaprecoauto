@@ -585,14 +585,36 @@
     ]
   },
   {
-    "nome": "🍝 Massa Lasanha 500g R$6,89",
-    "nagumo": [],
-    "shibata": []
+    "nome": "🍝 Massa Lasanha 500g R$13,90",
+    "nagumo": [
+      "https://www.nagumo.com/p/236058",
+      "https://www.nagumo.com/p/445139",
+      "https://www.nagumo.com/p/825726"
+    ],
+    "shibata": [
+      "https://www.loja.shibata.com.br/produto/31130/massa-de-semola-com-ovos-para-lasanha-dona-benta-200g",
+      "https://www.loja.shibata.com.br/produto/14469/massa-para-lasanha-aricanduva-500g",
+      "https://www.loja.shibata.com.br/produto/5400/massa-de-semola-com-ovos-para-lasanha-petybon-caixa-500g",
+      "https://www.loja.shibata.com.br/produto/11142/massa-de-semola-com-ovos-para-lasanha-renata-caixa-500g",
+      "https://www.loja.shibata.com.br/produto/14470/massa-para-lasanha-aricanduva-1kg"
+    ]
   },
   {
-    "nome": "🥐 Massa Pastel 1kg R$11,90",
-    "nagumo": [],
-    "shibata": []
+    "nome": "🥐 Massa Pastel 1kg R$9,95",
+    "nagumo": [
+      "https://www.nagumo.com/p/235990",
+      "https://www.nagumo.com/p/235983",
+      "https://www.nagumo.com/p/240302",
+      "https://www.nagumo.com/p/240283",
+      "https://www.nagumo.com/p/350976"
+    ],
+    "shibata": [
+      "https://www.loja.shibata.com.br/produto/40024/massa-para-pastel-aricanduva-rolo-1kg",
+      "https://www.loja.shibata.com.br/produto/33598/massa-para-pastel-massa-da-feira-rolo-2kg",
+      "https://www.loja.shibata.com.br/produto/30446/massa-para-pastel-massa-da-feira-2kg",
+      "https://www.loja.shibata.com.br/produto/40018/massa-para-pastel-cortada-aricanduva-pacote-2kg",
+      "https://www.loja.shibata.com.br/produto/10788/massa-para-pastel-aricanduva-rolo-2kg"
+    ]
   },
   {
     "nome": "🌽 Milho Quero R$19,12",
